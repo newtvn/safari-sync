@@ -1419,9 +1419,16 @@ body.loaded .hero-title.dotted-text span {
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
     .features-grid {
         grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        /* Let content dictate height on mobile */
+    }
+
+    .feature-card {
+        min-height: 200px;
+        /* Reduce min-height for mobile if needed */
     }
 
     .feature-card.col-span-2 {
@@ -4509,6 +4516,7 @@ body.loaded .hero-title.dotted-text span {
     background: var(--accent-primary);
     color: var(--bg-primary);
 }
+
 /* Word grouping for responsive text to prevent char break */
 .dotted-text .word-group {
     display: inline-flex;
@@ -4663,7 +4671,8 @@ body.loaded .hero-title.dotted-text span {
     margin: 0 20px;
 }
 
-.notch-left, .notch-right {
+.notch-left,
+.notch-right {
     width: 30px;
     height: 30px;
     background: var(--bg-primary);
@@ -4819,27 +4828,35 @@ body.loaded .hero-title.dotted-text span {
     .ticket-header-nav {
         padding: 0 16px;
     }
+
     .ticket-container {
         padding: 0 16px;
     }
+
     .ticket-top {
         padding: 24px 20px;
     }
+
     .city-code {
         font-size: 24px;
     }
+
     .route-arrow {
         padding: 0 10px;
     }
+
     .detail-grid {
         gap: 16px;
     }
+
     .ticket-details {
         padding: 10px 20px 24px;
     }
+
     .ticket-bottom {
         padding: 0 20px 24px;
     }
+
     .ticket-actions-inline {
         flex-direction: column;
         gap: 12px;

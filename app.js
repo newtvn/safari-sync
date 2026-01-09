@@ -223,8 +223,8 @@ function handleLogin(e) {
     // Simulate login
     if (email && password) {
         state.user = {
-            firstName: 'John',
-            lastName: 'Doe',
+            firstName: 'Newtvn',
+            lastName: '',
             email: email,
             phone: '+254 712 345 678'
         };
@@ -232,7 +232,7 @@ function handleLogin(e) {
         localStorage.setItem('safariSyncUser', JSON.stringify(state.user));
         updateUIForLoggedInUser();
         closeModal('login');
-        showToast('Welcome back, John!');
+        showToast('Welcome back, Newtvn!');
     }
 }
 
@@ -269,6 +269,10 @@ function logout() {
     showToast('You have been logged out');
 }
 
+// ==========================================
+// UI Updates
+// ==========================================
+
 function updateUIForLoggedInUser() {
     const navActions = document.getElementById('navActions');
     const navUser = document.getElementById('navUser');
@@ -283,7 +287,7 @@ function updateUIForLoggedInUser() {
     mobileAuthButtons.style.display = 'none';
     mobileUserMenu.style.display = 'block';
 
-    const initials = state.user.firstName[0] + state.user.lastName[0];
+    const initials = state.user.firstName[0] + (state.user.lastName ? state.user.lastName[0] : '');
     userAvatarNav.textContent = initials;
     userNameNav.textContent = state.user.firstName;
 
@@ -974,7 +978,7 @@ function updatePaymentView() {
 
 // Override showView to include payment updates
 const originalShowView = showView;
-window.showView = function(viewName) {
+window.showView = function (viewName) {
     originalShowView(viewName);
     if (viewName === 'payment') {
         updatePaymentView();

@@ -1942,6 +1942,19 @@ body.loaded .hero-title.dotted-text span {
     margin-bottom: 32px;
 }
 
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    /* Increased weight for visibility */
+    transition: color var(--transition-fast);
+    font-family: 'Codystar', display;
+    /* Added dotted font */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .back-btn {
     display: flex;
     align-items: center;

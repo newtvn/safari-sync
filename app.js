@@ -195,6 +195,12 @@ function showModal(modalName) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+
+    // Close mobile menu if open
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+        toggleMobileMenu();
+    }
 }
 
 function closeModal(modalName) {

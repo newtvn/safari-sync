@@ -868,9 +868,9 @@ function renderBookings(filter) {
             <div class="booking-actions">
                 ${booking.status === 'upcoming' ? `
                     <button class="btn-ghost-small" onclick="showView('tracking')">Track</button>
-                    <button class="btn-ghost-small">View Ticket</button>
+                    <button class="btn-ghost-small" onclick="showView('ticket')">View Ticket</button>
                 ` : booking.status === 'completed' ? `
-                    <button class="btn-ghost-small">View Ticket</button>
+                    <button class="btn-ghost-small" onclick="showView('ticket')">View Ticket</button>
                     <button class="btn-ghost-small">Rebook</button>
                 ` : `
                     <button class="btn-ghost-small">Rebook</button>
@@ -993,5 +993,42 @@ document.querySelectorAll('input').forEach(input => {
         }
     });
 });
+
+// ==========================================
+// Ticket View Logic
+// ==========================================
+
+function shareTicket() {
+    const shareData = {
+        title: 'My Safari Sync Ticket',
+        text: 'Here is my ticket for the trip from Nairobi to Kampala on Jan 15, 2024. Bus Operator: Modern Safari.',
+        url: window.location.href // Ideally this would be a unique ticket URL
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData)
+            .then(() => showToast('Ticket shared successfully'))
+            .catch((error) => console.log('Error sharing:', error));
+    } else {
+        // Fallback
+        navigator.clipboard.writeText(`Ticket: Nairobi -> Kampala. Ref: SS-8839-XJ. Date: Jan 15. Track here: ${window.location.href}`)
+            .then(() => showToast('Ticket details copied to clipboard'))
+            .catch(() => showToast('Could not share ticket'));
+    }
+}
+
+function trackTicketRide() {
+    // Switch to tracking view
+    showView('tracking');
+    // Pre-fill tracking info (simulated)
+    const trackingInput = document.getElementById('trackingInput');
+    if (trackingInput) {
+        trackingInput.value = 'SS-8839-XJ';
+        // Auto trigger track
+        setTimeout(() => {
+            trackRide();
+        }, 500);
+    }
+}
 
 console.log('Safari Sync initialized successfully');

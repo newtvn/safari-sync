@@ -4514,3 +4514,334 @@ body.loaded .hero-title.dotted-text span {
     display: inline-flex;
     white-space: nowrap;
 }
+
+/* Ticket View Styles */
+.ticket-page {
+    padding-top: calc(var(--nav-height) + 40px);
+    padding-bottom: 60px;
+    min-height: 100vh;
+}
+
+.ticket-header-nav {
+    max-width: 600px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.ticket-header-nav h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ticket-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.ticket-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+}
+
+.ticket-top {
+    padding: 32px;
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+}
+
+.ticket-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.ticket-status {
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.ticket-status.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px dotted rgba(16, 185, 129, 0.4);
+}
+
+.ticket-route-large {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.city-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.city-group.right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.city-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.city-code {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+}
+
+.city-name {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.route-arrow {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    color: var(--text-tertiary);
+}
+
+.route-arrow svg {
+    width: 100%;
+    height: 24px;
+    opacity: 0.5;
+}
+
+.trip-duration {
+    font-size: 11px;
+    margin-top: 4px;
+    background: var(--bg-primary);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Ticket Divider (Perforation) */
+.ticket-divider {
+    position: relative;
+    height: 30px;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+}
+
+.divider-line {
+    flex: 1;
+    height: 0;
+    border-top: 3px dotted var(--border-color);
+    margin: 0 20px;
+}
+
+.notch-left, .notch-right {
+    width: 30px;
+    height: 30px;
+    background: var(--bg-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+}
+
+.notch-left {
+    left: -15px;
+}
+
+.notch-right {
+    right: -15px;
+}
+
+/* Ticket Details */
+.ticket-details {
+    padding: 10px 32px 32px;
+    background: var(--bg-card);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.detail-item.full-width {
+    grid-column: span 2;
+}
+
+.detail-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.detail-value.accent {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+/* Ticket Bottom (QR & Actions) */
+.ticket-bottom {
+    padding: 0 32px 32px;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.qr-code-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.qr-code {
+    width: 120px;
+    height: 120px;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.qr-pattern {
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#000 40%, transparent 40%);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+    opacity: 0.9;
+}
+
+.ticket-id {
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 1px;
+}
+
+.ticket-actions-inline {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 3px dotted var(--border-color);
+}
+
+.action-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.action-btn.primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: 3px dotted transparent;
+}
+
+.action-btn.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.action-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.ticket-footer-text {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-top: 24px;
+}
+
+/* Responsive Ticket View */
+@media (max-width: 480px) {
+    .ticket-header-nav {
+        padding: 0 16px;
+    }
+    .ticket-container {
+        padding: 0 16px;
+    }
+    .ticket-top {
+        padding: 24px 20px;
+    }
+    .city-code {
+        font-size: 24px;
+    }
+    .route-arrow {
+        padding: 0 10px;
+    }
+    .detail-grid {
+        gap: 16px;
+    }
+    .ticket-details {
+        padding: 10px 20px 24px;
+    }
+    .ticket-bottom {
+        padding: 0 20px 24px;
+    }
+    .ticket-actions-inline {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

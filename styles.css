@@ -1052,6 +1052,15 @@ body.loaded .hero-title.dotted-text span {
     letter-spacing: 1px;
 }
 
+.distance-text {
+    font-family: 'Codystar', display;
+    font-size: 10px;
+    fill: var(--text-secondary);
+    font-weight: 700;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
 /* Booking Card */
 .booking-card {
     background: rgba(26, 26, 26, 0.85);

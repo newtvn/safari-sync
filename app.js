@@ -1120,3 +1120,90 @@ function formatFileSize(bytes) {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
 }
+
+// ==========================================
+// Parcel Mode & SOS Logic
+// ==========================================
+
+function setBookingMode(mode) {
+    const passengersGroup = document.querySelector('.passengers-group');
+    const searchButtonText = document.querySelector('.booking-form button[type="submit"]');
+    const tabs = document.querySelectorAll('.booking-tab');
+
+    // Update active tab state
+    tabs.forEach(tab => {
+        if (mode === 'parcel' && tab.dataset.tab === 'parcel') {
+            tab.classList.add('active');
+        } else if (mode === 'passenger' && tab.dataset.tab !== 'parcel') {
+            // Keep the previously active passenger tab active or default to one-way
+            // For simplicity, if switching back to passenger, defaulting to One Way
+            if (tab.dataset.tab === 'oneway') tab.classList.add('active');
+            else tab.classList.remove('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+
+    if (mode === 'parcel') {
+        // Change UI for Parcel
+        if (passengersGroup) passengersGroup.style.display = 'none';
+        if (searchButtonText) searchButtonText.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            Send Parcel
+        `;
+        
+        // Update Tracking Title contextually
+        const trackingTitle = document.getElementById('trackingTitle');
+        const trackingSubtitle = document.getElementById('trackingSubtitle');
+        if (trackingTitle) trackingTitle.textContent = 'Track Your Parcel';
+        if (trackingSubtitle) trackingSubtitle.textContent = 'Enter parcel reference number to track shipment';
+
+    } else {
+        // Change UI for Passenger
+        if (passengersGroup) passengersGroup.style.display = 'block';
+        if (searchButtonText) searchButtonText.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            Search Buses
+        `;
+
+        // Update Tracking Title contextually
+        const trackingTitle = document.getElementById('trackingTitle');
+        const trackingSubtitle = document.getElementById('trackingSubtitle');
+        if (trackingTitle) trackingTitle.textContent = 'Track Your Ride';
+        if (trackingSubtitle) trackingSubtitle.textContent = 'Enter your booking reference to track your bus in real-time';
+    }
+}
+
+function triggerSOS() {
+    if (confirm('Are you sure you want to trigger an Emergency SOS? This will alert our 24/7 command center and local authorities with your current location.')) {
+        // Simulate SOS API call
+        const sosButton = document.querySelector('.sos-button');
+        sosButton.innerHTML = 'ALERT SENT!';
+        sosButton.style.background = '#000';
+        sosButton.classList.remove('pulse-animation');
+        
+        showToast('SOS ALERT SENT! Help is on the way.');
+        
+        // In a real app, this would get geolocation and send to backend
+        console.log('SOS Triggered at: ' + new Date().toISOString());
+        
+        setTimeout(() => {
+            // Reset for demo
+            sosButton.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                EMERGENCY SOS
+            `;
+            sosButton.style.background = '#ef4444';
+            sosButton.classList.add('pulse-animation');
+        }, 5000);
+    }
+}

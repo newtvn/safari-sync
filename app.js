@@ -1038,3 +1038,85 @@ function trackTicketRide() {
 }
 
 console.log('Safari Sync initialized successfully');
+
+// ==========================================
+// Profile File Upload Logic
+// ==========================================
+
+// Initialize profile sidebar navigation to handle section switching
+document.addEventListener('DOMContentLoaded', () => {
+    const profileNavItems = document.querySelectorAll('.profile-nav-item');
+    const profileSections = document.querySelectorAll('.profile-section, .profile-form-section');
+
+    profileNavItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionName = item.dataset.section;
+
+            // Remove active class from all items
+            profileNavItems.forEach(nav => nav.classList.remove('active'));
+            // Add active class to clicked item
+            item.classList.add('active');
+
+            // Hide all sections
+            profileSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            // Mapping section names to element IDs
+            let targetId = '';
+            if (sectionName === 'files') {
+                targetId = 'filesSection';
+            } else if (sectionName === 'personal') {
+                // Personal section is the default form container in existing HTML structure which might be class 'profile-form-section'
+                // But we need to target it specifically. Let's assume the existing form section is for personal info.
+                // We will rely on our new querySelectorAll to find the right elements.
+                // Since the original HTML structure for Personal Info didn't have an ID, we assume it shows up by default.
+                // We'll fix this by ensuring the Personal Info section has an ID or class we can target.
+                // For now, let's treat '.profile-form-section' as the personal info section.
+                 document.querySelector('.profile-form-section').style.display = 'block';
+                 return;
+            } else {
+                 // Placeholder for other sections (Security, Notifications etc - not implemented yet but logic handles hiding)
+                 // If ID doesn't exist, we do nothing or show coming soon
+            }
+
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+        });
+    });
+});
+
+function handleFileUpload(input, docType) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const card = input.closest('.file-upload-card');
+        const statusBadge = card.querySelector('.file-status');
+        const uploadZone = card.querySelector('.upload-zone');
+        
+        // Simulate upload
+        // In a real app, you would use FormData and fetch to send to backend
+        
+        statusBadge.textContent = 'Pending Review';
+        statusBadge.className = 'file-status pending';
+        
+        uploadZone.classList.add('success');
+        uploadZone.innerHTML = `
+            <div class="upload-text">${file.name} (${formatFileSize(file.size)})</div>
+            <button class="btn-ghost-small" style="margin-top: 8px;">Replace</button>
+        `;
+        
+        showToast(`${docType} uploaded successfully`);
+    }
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}

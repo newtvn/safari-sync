@@ -89,7 +89,7 @@ Contributions are what make the open source community such an amazing place to l
 
 <div align="center">
 
-Built with care in East Africa.
+Powered by [www.prolithica.com](http://www.prolithica.com)
 <br />
 &copy; 2026 Safari Sync. All Rights Reserved.
 

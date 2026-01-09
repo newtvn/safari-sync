@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Sync - Cross-Border Bus Travel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <svg viewBox="0 0 60 60" class="bus-icon-loader">
+                    <rect x="5" y="20" width="50" height="25" rx="4" fill="currentColor"/>
+                    <rect x="8" y="25" width="12" height="10" rx="2" fill="#1a1a1a"/>
+                    <rect x="24" y="25" width="12" height="10" rx="2" fill="#1a1a1a"/>
+                    <rect x="40" y="25" width="12" height="10" rx="2" fill="#1a1a1a"/>
+                    <circle cx="15" cy="48" r="5" fill="currentColor"/>
+                    <circle cx="45" cy="48" r="5" fill="currentColor"/>
+                </svg>
+            </div>
+            <span class="preloader-text">Safari Sync</span>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showView('home')">
+                <svg viewBox="0 0 40 40" class="logo-icon">
+                    <rect x="3" y="12" width="34" height="18" rx="3" fill="currentColor"/>
+                    <rect x="6" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                    <rect x="16" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                    <rect x="26" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                    <circle cx="10" cy="32" r="3.5" fill="currentColor"/>
+                    <circle cx="30" cy="32" r="3.5" fill="currentColor"/>
+                </svg>
+                <span>Safari Sync</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#" onclick="showView('home')">Home</a>
+                <a href="#" onclick="showView('routes')">Routes</a>
+                <a href="#" onclick="showView('tracking')">Track Ride</a>
+                <a href="#" onclick="showView('about')">About</a>
+            </div>
+
+            <div class="nav-actions" id="navActions">
+                <button class="btn-ghost" onclick="showModal('login')">Log in</button>
+                <button class="btn-primary" onclick="showModal('signup')">Sign up</button>
+            </div>
+
+            <div class="nav-user" id="navUser" style="display: none;">
+                <div class="user-menu" onclick="toggleUserMenu()">
+                    <div class="user-avatar" id="userAvatarNav">JD</div>
+                    <span id="userNameNav">John Doe</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" onclick="showView('dashboard')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a href="#" onclick="showView('bookings')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                            <path d="M16 13H8"/>
+                            <path d="M16 17H8"/>
+                            <path d="M10 9H8"/>
+                        </svg>
+                        My Bookings
+                    </a>
+                    <a href="#" onclick="showView('profile')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Profile
+                    </a>
+                    <a href="#" onclick="showView('wallet')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2"/>
+                            <path d="M1 10h22"/>
+                        </svg>
+                        Wallet
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" onclick="logout()" class="logout-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16,17 21,12 16,7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Log out
+                    </a>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#" onclick="showView('home'); toggleMobileMenu()">Home</a>
+            <a href="#" onclick="showView('routes'); toggleMobileMenu()">Routes</a>
+            <a href="#" onclick="showView('tracking'); toggleMobileMenu()">Track Ride</a>
+            <a href="#" onclick="showView('about'); toggleMobileMenu()">About</a>
+            <div class="mobile-menu-divider"></div>
+            <div class="mobile-auth-buttons" id="mobileAuthButtons">
+                <button class="btn-ghost" onclick="showModal('login'); toggleMobileMenu()">Log in</button>
+                <button class="btn-primary" onclick="showModal('signup'); toggleMobileMenu()">Sign up</button>
+            </div>
+            <div class="mobile-user-menu" id="mobileUserMenu" style="display: none;">
+                <a href="#" onclick="showView('dashboard'); toggleMobileMenu()">Dashboard</a>
+                <a href="#" onclick="showView('bookings'); toggleMobileMenu()">My Bookings</a>
+                <a href="#" onclick="showView('profile'); toggleMobileMenu()">Profile</a>
+                <a href="#" onclick="logout(); toggleMobileMenu()">Log out</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Home View -->
+        <section class="view active" id="homeView">
+            <div class="hero hero-new-layout">
+                <div class="hero-bg">
+                    <div class="hero-gradient"></div>
+                </div>
+
+                <!-- Hero Header - Full Width Title -->
+                <div class="hero-header">
+                    <span class="hero-badge">East Africa's Premier Bus Service</span>
+                    <h1 class="hero-title">Travel East Africa <span class="highlight">Your Way</span></h1>
+                    <p class="hero-subtitle">Book cross-border bus travel between Kenya, Uganda, Rwanda, Tanzania, and South Sudan.</p>
+                </div>
+
+                <!-- Hero Body - Animation & Booking Side by Side -->
+                <div class="hero-body">
+                    <!-- Animation Container -->
+                    <div class="hero-animation">
+                        <svg class="hero-map-inline" viewBox="150 50 400 650" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <!-- Gradients - Black & White -->
+                            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#a3a3a3;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+                            </linearGradient>
+
+                            <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.5" />
+                                <stop offset="100%" style="stop-color:#a3a3a3;stop-opacity:0" />
+                            </radialGradient>
+
+                            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+
+                            <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+                                <feGaussianBlur stdDeviation="4" result="blur"/>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Connection Lines with Animation -->
+                        <!-- Juba to Kampala -->
+                        <path class="route-line" d="M 295 145 Q 280 280 305 385" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- Kampala to Nairobi -->
+                        <path class="route-line" d="M 305 385 Q 400 420 475 400" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- Kampala to Kigali -->
+                        <path class="route-line" d="M 305 385 Q 280 440 265 498" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- Nairobi to Kigali -->
+                        <path class="route-line" d="M 475 400 Q 370 460 265 498" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
+                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- Nairobi to Dar es Salaam -->
+                        <path class="route-line" d="M 475 400 Q 500 500 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- Kigali to Dar es Salaam -->
+                        <path class="route-line" d="M 265 498 Q 370 560 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
+                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+                        </path>
+
+                        <!-- City Points -->
+                        <!-- Juba - South Sudan -->
+                        <g class="city-point" filter="url(#softGlow)">
+                            <circle cx="295" cy="145" r="18" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="295" cy="145" r="8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="295" cy="145" r="4" fill="#ffffff"/>
+                            <text x="295" y="122" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">JUBA</text>
+                            <text x="295" y="175" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">South Sudan</text>
+                        </g>
+
+                        <!-- Kampala - Uganda -->
+                        <g class="city-point" filter="url(#softGlow)">
+                            <circle cx="305" cy="385" r="20" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                            </circle>
+                            <circle cx="305" cy="385" r="10" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="305" cy="385" r="5" fill="#ffffff"/>
+                            <text x="305" y="362" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">KAMPALA</text>
+                            <text x="305" y="415" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Uganda</text>
+                        </g>
+
+                        <!-- Nairobi - Kenya -->
+                        <g class="city-point" filter="url(#softGlow)">
+                            <circle cx="475" cy="400" r="22" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="22;30;22" dur="3s" repeatCount="indefinite" begin="1s"/>
+                            </circle>
+                            <circle cx="475" cy="400" r="11" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="475" cy="400" r="5.5" fill="#ffffff"/>
+                            <text x="475" y="377" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">NAIROBI</text>
+                            <text x="475" y="432" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Kenya</text>
+                        </g>
+
+                        <!-- Kigali - Rwanda -->
+                        <g class="city-point" filter="url(#softGlow)">
+                            <circle cx="265" cy="498" r="18" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+                            </circle>
+                            <circle cx="265" cy="498" r="8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="265" cy="498" r="4" fill="#ffffff"/>
+                            <text x="265" y="475" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">KIGALI</text>
+                            <text x="265" y="528" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Rwanda</text>
+                        </g>
+
+                        <!-- Dar es Salaam - Tanzania -->
+                        <g class="city-point" filter="url(#softGlow)">
+                            <circle cx="480" cy="600" r="20" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="20;26;20" dur="3s" repeatCount="indefinite" begin="2s"/>
+                            </circle>
+                            <circle cx="480" cy="600" r="9" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="480" cy="600" r="4.5" fill="#ffffff"/>
+                            <text x="480" y="577" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600" font-family="DM Sans, sans-serif">DAR ES SALAAM</text>
+                            <text x="480" y="630" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Tanzania</text>
+                        </g>
+
+                        <!-- Animated traveling dots - Bidirectional -->
+                        <!-- Juba <-> Kampala -->
+                        <circle r="3.5" fill="#ffffff" filter="url(#glow)">
+                            <animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path1"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path1" d="M 295 145 Q 280 280 305 385" fill="none" stroke="none"/>
+
+                        <!-- Kampala <-> Nairobi -->
+                        <circle r="3.5" fill="#ffffff" filter="url(#glow)">
+                            <animateMotion dur="5s" repeatCount="indefinite" begin="0.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path2"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path2" d="M 305 385 Q 400 420 475 400" fill="none" stroke="none"/>
+
+                        <!-- Kampala <-> Kigali -->
+                        <circle r="3.5" fill="#ffffff" filter="url(#glow)">
+                            <animateMotion dur="5.5s" repeatCount="indefinite" begin="1s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path3"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path3" d="M 305 385 Q 280 440 265 498" fill="none" stroke="none"/>
+
+                        <!-- Nairobi <-> Kigali -->
+                        <circle r="3" fill="#ffffff" filter="url(#glow)" opacity="0.7">
+                            <animateMotion dur="6s" repeatCount="indefinite" begin="1.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path4"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path4" d="M 475 400 Q 370 460 265 498" fill="none" stroke="none"/>
+
+                        <!-- Nairobi <-> Dar es Salaam -->
+                        <circle r="3.5" fill="#ffffff" filter="url(#glow)">
+                            <animateMotion dur="5s" repeatCount="indefinite" begin="2s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path5"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path5" d="M 475 400 Q 500 500 480 600" fill="none" stroke="none"/>
+
+                        <!-- Kigali <-> Dar es Salaam -->
+                        <circle r="3" fill="#ffffff" filter="url(#glow)" opacity="0.7">
+                            <animateMotion dur="6.5s" repeatCount="indefinite" begin="2.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path6"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path6" d="M 265 498 Q 370 560 480 600" fill="none" stroke="none"/>
+
+                        </svg>
+                    </div>
+
+                    <!-- Booking Panel -->
+                    <div class="hero-booking">
+                        <div class="booking-card">
+                        <div class="booking-tabs">
+                            <button class="booking-tab active" data-tab="oneway">One Way</button>
+                            <button class="booking-tab" data-tab="roundtrip">Round Trip</button>
+                        </div>
+
+                        <form class="booking-form" id="bookingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>From</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="10" r="3"/>
+                                            <path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/>
+                                        </svg>
+                                        <select id="fromCity" required>
+                                            <option value="">Select departure</option>
+                                            <option value="nairobi">Nairobi, Kenya</option>
+                                            <option value="mombasa">Mombasa, Kenya</option>
+                                            <option value="kisumu">Kisumu, Kenya</option>
+                                            <option value="kampala">Kampala, Uganda</option>
+                                            <option value="entebbe">Entebbe, Uganda</option>
+                                            <option value="jinja">Jinja, Uganda</option>
+                                            <option value="kigali">Kigali, Rwanda</option>
+                                            <option value="butare">Butare, Rwanda</option>
+                                            <option value="juba">Juba, South Sudan</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="swap-btn" onclick="swapCities()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 16V4m0 12l-4-4m4 4l4-4M17 8v12m0-12l4 4m-4-4l-4 4"/>
+                                    </svg>
+                                </button>
+
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="10" r="3"/>
+                                            <path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/>
+                                        </svg>
+                                        <select id="toCity" required>
+                                            <option value="">Select destination</option>
+                                            <option value="nairobi">Nairobi, Kenya</option>
+                                            <option value="mombasa">Mombasa, Kenya</option>
+                                            <option value="kisumu">Kisumu, Kenya</option>
+                                            <option value="kampala">Kampala, Uganda</option>
+                                            <option value="entebbe">Entebbe, Uganda</option>
+                                            <option value="jinja">Jinja, Uganda</option>
+                                            <option value="kigali">Kigali, Rwanda</option>
+                                            <option value="butare">Butare, Rwanda</option>
+                                            <option value="juba">Juba, South Sudan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row dates-row" id="datesRow">
+                                <div class="form-group">
+                                    <label>Departure Date</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                                        </svg>
+                                        <input type="date" id="departDate" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group return-date" id="returnDateGroup" style="display: none;">
+                                    <label>Return Date</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                                        </svg>
+                                        <input type="date" id="returnDate">
+                                    </div>
+                                </div>
+
+                                <div class="form-group passengers-group">
+                                    <label>Passengers</label>
+                                    <div class="input-with-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="9" cy="7" r="4"/>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                        </svg>
+                                        <select id="passengers" required>
+                                            <option value="1">1 Passenger</option>
+                                            <option value="2">2 Passengers</option>
+                                            <option value="3">3 Passengers</option>
+                                            <option value="4">4 Passengers</option>
+                                            <option value="5">5+ Passengers</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary btn-large btn-full">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                </svg>
+                                Search Buses
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500K+</span>
+                        <span class="stat-label">Happy Travelers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Routes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">On-Time</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Routes Section -->
+            <section class="section popular-routes">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Popular Routes</h2>
+                        <p>Most traveled cross-border routes in East Africa</p>
+                    </div>
+
+                    <div class="routes-grid">
+                        <div class="route-card" onclick="selectRoute('nairobi', 'kampala')">
+                            <div class="route-image" style="background-image: url('https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=400')"></div>
+                            <div class="route-content">
+                                <div class="route-cities">
+                                    <span>Nairobi</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                    <span>Kampala</span>
+                                </div>
+                                <div class="route-meta">
+                                    <span class="route-duration">~10 hrs</span>
+                                    <span class="route-price">From $35</span>
+                                </div>
+                                <div class="route-tags">
+                                    <span class="tag">Daily</span>
+                                    <span class="tag">WiFi</span>
+                                    <span class="tag">AC</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="route-card" onclick="selectRoute('kampala', 'kigali')">
+                            <div class="route-image" style="background-image: url('https://images.unsplash.com/photo-1580746738782-e6e9f2a2e3f0?w=400')"></div>
+                            <div class="route-content">
+                                <div class="route-cities">
+                                    <span>Kampala</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                    <span>Kigali</span>
+                                </div>
+                                <div class="route-meta">
+                                    <span class="route-duration">~8 hrs</span>
+                                    <span class="route-price">From $30</span>
+                                </div>
+                                <div class="route-tags">
+                                    <span class="tag">Daily</span>
+                                    <span class="tag">Meals</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="route-card" onclick="selectRoute('nairobi', 'kigali')">
+                            <div class="route-image" style="background-image: url('https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=400')"></div>
+                            <div class="route-content">
+                                <div class="route-cities">
+                                    <span>Nairobi</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                    <span>Kigali</span>
+                                </div>
+                                <div class="route-meta">
+                                    <span class="route-duration">~18 hrs</span>
+                                    <span class="route-price">From $55</span>
+                                </div>
+                                <div class="route-tags">
+                                    <span class="tag">Overnight</span>
+                                    <span class="tag">Sleeper</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="route-card" onclick="selectRoute('kampala', 'juba')">
+                            <div class="route-image" style="background-image: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=400')"></div>
+                            <div class="route-content">
+                                <div class="route-cities">
+                                    <span>Kampala</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                    <span>Juba</span>
+                                </div>
+                                <div class="route-meta">
+                                    <span class="route-duration">~12 hrs</span>
+                                    <span class="route-price">From $45</span>
+                                </div>
+                                <div class="route-tags">
+                                    <span class="tag">Daily</span>
+                                    <span class="tag">Border Assist</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="section features">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Why Safari Sync?</h2>
+                        <p>The modern way to travel across East Africa</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <!-- 1. Real-Time Tracking: Big Feature (2x2) -->
+                        <div class="feature-card col-span-2 row-span-2">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Real-Time Tracking</h3>
+                                <p>Track your bus live on the map. Share your location with loved ones for peace of mind. Know exactly when your ride arrives.</p>
+                            </div>
+                            <div class="feature-image-container">
+                                <img src="https://images.unsplash.com/photo-1636819488524-1f019c4e1c44?w=500&auto=format&fit=crop&q=60" alt="Map Tracking UI" class="feature-img">
+                            </div>
+                        </div>
+
+                        <!-- 2. Verified Operators: Standard -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Verified Operators</h3>
+                                <p>All bus operators are verified and rated. Travel with confidence.</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. Secure Payments: Standard -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                    <line x1="2" y1="10" x2="22" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Secure Payments</h3>
+                                <p>Pay safely with M-Pesa, card, or mobile money.</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. Border Assistance: Wide (Span 2) -->
+                        <div class="feature-card col-span-2">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Border Assistance</h3>
+                                <p>We assist with crossing borders. Visa requirements, documentation support, and fast-track clearance for our partner buses.</p>
+                            </div>
+                        </div>
+
+                        <!-- 5. 24/7 Support: Standard -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>24/7 Support</h3>
+                                <p>Always here to help in English & Swahili.</p>
+                            </div>
+                        </div>
+
+                        <!-- 6. Loyalty Rewards: Standard -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Loyalty Rewards</h3>
+                                <p>Earn points for every km traveled.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- App Download Section -->
+            <section class="section app-section">
+                <div class="container">
+                    <div class="app-content">
+                        <div class="app-text">
+                            <h2>Get the Safari Sync App</h2>
+                            <p>Book rides, track buses, and manage your trips on the go. Available for iOS and Android.</p>
+                            <div class="app-buttons">
+                                <a href="#" class="app-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                                    </svg>
+                                    <div>
+                                        <span>Download on the</span>
+                                        <strong>App Store</strong>
+                                    </div>
+                                </a>
+                                <a href="#" class="app-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
+                                    </svg>
+                                    <div>
+                                        <span>Get it on</span>
+                                        <strong>Google Play</strong>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="app-mockup">
+                            <div class="phone-frame">
+                                <div class="phone-screen">
+                                    <div class="mock-header">
+                                        <span>Safari Sync</span>
+                                    </div>
+                                    <div class="mock-map"></div>
+                                    <div class="mock-card">
+                                        <div class="mock-route">
+                                            <div class="mock-dot"></div>
+                                            <div class="mock-line"></div>
+                                            <div class="mock-dot end"></div>
+                                        </div>
+                                        <div class="mock-info">
+                                            <span>Nairobi → Kampala</span>
+                                            <span class="mock-time">Arriving in 2h 45m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-grid">
+                        <div class="footer-brand">
+                            <a href="#" class="logo">
+                                <svg viewBox="0 0 40 40" class="logo-icon">
+                                    <rect x="3" y="12" width="34" height="18" rx="3" fill="currentColor"/>
+                                    <rect x="6" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                                    <rect x="16" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                                    <rect x="26" y="15" width="8" height="7" rx="1.5" fill="#1a1a1a"/>
+                                    <circle cx="10" cy="32" r="3.5" fill="currentColor"/>
+                                    <circle cx="30" cy="32" r="3.5" fill="currentColor"/>
+                                </svg>
+                                <span>Safari Sync</span>
+                            </a>
+                            <p>Connecting East Africa, one journey at a time.</p>
+                            <div class="social-links">
+                                <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+                                <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                                <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>
+                            </div>
+                        </div>
+
+                        <div class="footer-links">
+                            <h4>Company</h4>
+                            <a href="#">About Us</a>
+                            <a href="#">Careers</a>
+                            <a href="#">Press</a>
+                            <a href="#">Blog</a>
+                        </div>
+
+                        <div class="footer-links">
+                            <h4>Support</h4>
+                            <a href="#">Help Center</a>
+                            <a href="#">Safety</a>
+                            <a href="#">Lost & Found</a>
+                            <a href="#">Accessibility</a>
+                        </div>
+
+                        <div class="footer-links">
+                            <h4>Legal</h4>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Settings</a>
+                        </div>
+
+                        <div class="footer-links">
+                            <h4>Countries</h4>
+                            <a href="#">Kenya</a>
+                            <a href="#">Uganda</a>
+                            <a href="#">Rwanda</a>
+                            <a href="#">South Sudan</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 Safari Sync. All rights reserved.</p>
+                        <div class="footer-lang">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <select>
+                                <option>English</option>
+                                <option>Swahili</option>
+                                <option>French</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <!-- Routes View -->
+        <section class="view" id="routesView">
+            <div class="routes-page">
+                <div class="routes-header">
+                    <h1>Available Routes</h1>
+                    <p>Find and book buses across East Africa</p>
+                </div>
+
+                <div class="routes-container">
+                    <div class="routes-filters">
+                        <div class="filter-group">
+                            <label>From</label>
+                            <select id="filterFrom">
+                                <option value="">All Origins</option>
+                                <option value="nairobi">Nairobi</option>
+                                <option value="kampala">Kampala</option>
+                                <option value="kigali">Kigali</option>
+                                <option value="juba">Juba</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>To</label>
+                            <select id="filterTo">
+                                <option value="">All Destinations</option>
+                                <option value="nairobi">Nairobi</option>
+                                <option value="kampala">Kampala</option>
+                                <option value="kigali">Kigali</option>
+                                <option value="juba">Juba</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Price Range</label>
+                            <select id="filterPrice">
+                                <option value="">Any Price</option>
+                                <option value="0-30">Under $30</option>
+                                <option value="30-50">$30 - $50</option>
+                                <option value="50+">$50+</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    </div>
+
+                    <div class="routes-list" id="routesList">
+                        <!-- Routes will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results View -->
+        <section class="view" id="searchResultsView">
+            <div class="search-results-page">
+                <div class="search-results-header">
+                    <button class="back-btn" onclick="showView('home')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <div class="search-summary" id="searchSummary">
+                        <h2>Nairobi → Kampala</h2>
+                        <p>Jan 15, 2024 • 1 Passenger</p>
+                    </div>
+                </div>
+
+                <div class="search-results-container">
+                    <div class="results-sidebar">
+                        <div class="filter-section">
+                            <h3>Departure Time</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Morning (6AM - 12PM)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Afternoon (12PM - 6PM)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Evening (6PM - 12AM)
+                            </label>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Bus Type</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Standard
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Executive
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> VIP Sleeper
+                            </label>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Amenities</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> WiFi
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> AC
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Meals Included
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> USB Charging
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="results-list" id="resultsList">
+                        <!-- Results populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seat Selection View -->
+        <section class="view" id="seatSelectionView">
+            <div class="seat-selection-page">
+                <div class="seat-header">
+                    <button class="back-btn" onclick="showView('searchResults')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2>Select Your Seat</h2>
+                </div>
+
+                <div class="seat-selection-container">
+                    <div class="bus-layout">
+                        <div class="bus-front">
+                            <div class="driver-area">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                <span>Driver</span>
+                            </div>
+                            <div class="door-indicator">Door</div>
+                        </div>
+
+                        <div class="seats-grid" id="seatsGrid">
+                            <!-- Seats populated by JS -->
+                        </div>
+
+                        <div class="seat-legend">
+                            <div class="legend-item">
+                                <div class="seat-icon available"></div>
+                                <span>Available</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-icon selected"></div>
+                                <span>Selected</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-icon occupied"></div>
+                                <span>Occupied</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat-icon vip"></div>
+                                <span>VIP (+$10)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="seat-summary">
+                        <div class="trip-details">
+                            <h3>Trip Details</h3>
+                            <div class="trip-route">
+                                <div class="trip-point">
+                                    <div class="point-marker"></div>
+                                    <div class="point-info">
+                                        <span class="city" id="seatFromCity">Nairobi</span>
+                                        <span class="time" id="seatDepartTime">6:00 AM</span>
+                                    </div>
+                                </div>
+                                <div class="trip-line">
+                                    <span class="duration" id="seatDuration">10 hrs</span>
+                                </div>
+                                <div class="trip-point">
+                                    <div class="point-marker end"></div>
+                                    <div class="point-info">
+                                        <span class="city" id="seatToCity">Kampala</span>
+                                        <span class="time" id="seatArriveTime">4:00 PM</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bus-info">
+                                <img src="https://ui-avatars.com/api/?name=MS&background=d97706&color=fff" alt="" class="operator-logo">
+                                <div>
+                                    <span class="operator-name" id="seatOperator">Modern Safari</span>
+                                    <span class="bus-type" id="seatBusType">Executive Coach</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="selected-seats">
+                            <h4>Selected Seats</h4>
+                            <div id="selectedSeatsList">
+                                <p class="no-seats">No seats selected</p>
+                            </div>
+                        </div>
+
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Base Fare</span>
+                                <span id="baseFare">$0.00</span>
+                            </div>
+                            <div class="price-row" id="vipFeeRow" style="display: none;">
+                                <span>VIP Upgrade</span>
+                                <span id="vipFee">$0.00</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Service Fee</span>
+                                <span>$2.00</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total</span>
+                                <span id="totalPrice">$2.00</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary btn-large btn-full" id="proceedToPayment" onclick="showView('payment')" disabled>
+                            Proceed to Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment View -->
+        <section class="view" id="paymentView">
+            <div class="payment-page">
+                <div class="payment-header">
+                    <button class="back-btn" onclick="showView('seatSelection')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2>Payment</h2>
+                </div>
+
+                <div class="payment-container">
+                    <div class="payment-methods">
+                        <h3>Select Payment Method</h3>
+
+                        <div class="payment-options">
+                            <label class="payment-option active">
+                                <input type="radio" name="payment" value="mpesa" checked>
+                                <div class="payment-option-content">
+                                    <div class="payment-icon mpesa">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                        </svg>
+                                    </div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">M-Pesa</span>
+                                        <span class="payment-desc">Pay with your M-Pesa mobile money</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card">
+                                <div class="payment-option-content">
+                                    <div class="payment-icon card">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="1" y="4" width="22" height="16" rx="2"/>
+                                            <path d="M1 10h22"/>
+                                        </svg>
+                                    </div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Credit/Debit Card</span>
+                                        <span class="payment-desc">Visa, Mastercard, or American Express</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="mtn">
+                                <div class="payment-option-content">
+                                    <div class="payment-icon mtn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">MTN Mobile Money</span>
+                                        <span class="payment-desc">Pay with MTN MoMo</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="airtel">
+                                <div class="payment-option-content">
+                                    <div class="payment-icon airtel">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                                            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                                            <circle cx="12" cy="20" r="1"/>
+                                        </svg>
+                                    </div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Airtel Money</span>
+                                        <span class="payment-desc">Pay with Airtel Money</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="payment-form" id="paymentForm">
+                            <div class="mpesa-form" id="mpesaForm">
+                                <div class="form-group">
+                                    <label>M-Pesa Phone Number</label>
+                                    <div class="phone-input">
+                                        <span class="country-code">+254</span>
+                                        <input type="tel" placeholder="7XX XXX XXX" id="mpesaPhone">
+                                    </div>
+                                </div>
+                                <p class="payment-note">You will receive an M-Pesa prompt on your phone to complete the payment.</p>
+                            </div>
+
+                            <div class="card-form" id="cardForm" style="display: none;">
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456" id="cardNumber">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Expiry Date</label>
+                                        <input type="text" placeholder="MM/YY" id="cardExpiry">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CVV</label>
+                                        <input type="text" placeholder="123" id="cardCvv">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cardholder Name</label>
+                                    <input type="text" placeholder="John Doe" id="cardName">
+                                </div>
+                            </div>
+
+                            <div class="mtn-form" id="mtnForm" style="display: none;">
+                                <div class="form-group">
+                                    <label>MTN Phone Number</label>
+                                    <div class="phone-input">
+                                        <span class="country-code">+256</span>
+                                        <input type="tel" placeholder="7XX XXX XXX" id="mtnPhone">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="airtel-form" id="airtelForm" style="display: none;">
+                                <div class="form-group">
+                                    <label>Airtel Phone Number</label>
+                                    <div class="phone-input">
+                                        <span class="country-code">+256</span>
+                                        <input type="tel" placeholder="7XX XXX XXX" id="airtelPhone">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="passenger-details">
+                            <h3>Passenger Details</h3>
+                            <div class="form-group">
+                                <label>Full Name (as per ID)</label>
+                                <input type="text" placeholder="Enter full name" id="passengerName">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>ID Type</label>
+                                    <select id="idType">
+                                        <option value="national">National ID</option>
+                                        <option value="passport">Passport</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ID Number</label>
+                                    <input type="text" placeholder="Enter ID number" id="idNumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="+254 7XX XXX XXX" id="passengerPhone">
+                            </div>
+                            <div class="form-group">
+                                <label>Email (for ticket)</label>
+                                <input type="email" placeholder="email@example.com" id="passengerEmail">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-summary">
+                        <div class="summary-card">
+                            <h3>Booking Summary</h3>
+
+                            <div class="summary-route">
+                                <div class="summary-cities">
+                                    <span id="paymentFrom">Nairobi</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                    <span id="paymentTo">Kampala</span>
+                                </div>
+                                <span class="summary-date" id="paymentDate">Jan 15, 2024</span>
+                            </div>
+
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Operator</span>
+                                    <span id="paymentOperator">Modern Safari</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Departure</span>
+                                    <span id="paymentDepart">6:00 AM</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Seats</span>
+                                    <span id="paymentSeats">A1, A2</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-pricing">
+                                <div class="summary-row">
+                                    <span>Ticket Price</span>
+                                    <span id="paymentTicket">$70.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Service Fee</span>
+                                    <span>$2.00</span>
+                                </div>
+                                <div class="summary-row total">
+                                    <span>Total</span>
+                                    <span id="paymentTotal">$72.00</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-primary btn-large btn-full" onclick="processPayment()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                Pay Now
+                            </button>
+
+                            <p class="secure-note">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                Secured by 256-bit SSL encryption
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracking View -->
+        <section class="view" id="trackingView">
+            <div class="tracking-page">
+                <div class="tracking-header">
+                    <h1>Track Your Ride</h1>
+                    <p>Enter your booking reference to track your bus in real-time</p>
+                </div>
+
+                <div class="tracking-search">
+                    <div class="tracking-input-group">
+                        <input type="text" placeholder="Enter booking reference (e.g., SS-2024-001234)" id="trackingInput">
+                        <button class="btn-primary" onclick="trackRide()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            Track
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tracking-result" id="trackingResult" style="display: none;">
+                    <div class="tracking-map" id="trackingMap">
+                        <div class="map-placeholder">
+                            <div class="map-route-line"></div>
+                            <div class="map-bus-marker" id="busMarker">
+                                <svg viewBox="0 0 40 40">
+                                    <rect x="3" y="12" width="34" height="18" rx="3" fill="currentColor"/>
+                                    <circle cx="10" cy="32" r="3.5" fill="currentColor"/>
+                                    <circle cx="30" cy="32" r="3.5" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="map-point origin">
+                                <span>Nairobi</span>
+                            </div>
+                            <div class="map-point destination">
+                                <span>Kampala</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tracking-info">
+                        <div class="tracking-status">
+                            <div class="status-badge on-route">
+                                <span class="pulse"></span>
+                                On Route
+                            </div>
+                            <span class="last-updated">Last updated: 2 minutes ago</span>
+                        </div>
+
+                        <div class="tracking-details">
+                            <div class="tracking-card">
+                                <h3>Journey Progress</h3>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span>65% Complete</span>
+                                    <span>~3h 30m remaining</span>
+                                </div>
+                            </div>
+
+                            <div class="tracking-card">
+                                <h3>Current Location</h3>
+                                <p class="location-text">Near Busia Border Point</p>
+                                <p class="location-subtext">Kenya-Uganda Border</p>
+                            </div>
+
+                            <div class="tracking-card">
+                                <h3>ETA</h3>
+                                <p class="eta-time">4:30 PM</p>
+                                <p class="eta-status on-time">On Time</p>
+                            </div>
+
+                            <div class="tracking-card">
+                                <h3>Bus Details</h3>
+                                <div class="bus-details-info">
+                                    <div class="detail-row">
+                                        <span>Operator</span>
+                                        <span>Modern Safari</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Bus Number</span>
+                                        <span>KCA 456B</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Driver</span>
+                                        <span>James Mwangi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tracking-actions">
+                            <button class="btn-secondary" onclick="shareLocation()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="18" cy="5" r="3"/>
+                                    <circle cx="6" cy="12" r="3"/>
+                                    <circle cx="18" cy="19" r="3"/>
+                                    <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+                                </svg>
+                                Share Location
+                            </button>
+                            <button class="btn-secondary" onclick="contactDriver()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                Contact Driver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard View -->
+        <section class="view" id="dashboardView">
+            <div class="dashboard-page">
+                <div class="dashboard-header">
+                    <h1>Welcome back, <span id="dashboardName">John</span></h1>
+                    <p>Manage your bookings and track your rides</p>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <path d="M14 2v6h6"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">Total Trips</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">2</span>
+                            <span class="stat-label">Upcoming</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">2,450</span>
+                            <span class="stat-label">Points</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2"/>
+                                <path d="M1 10h22"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">$125</span>
+                            <span class="stat-label">Wallet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <div class="section-header-inline">
+                            <h2>Upcoming Trips</h2>
+                            <a href="#" onclick="showView('bookings')">View All</a>
+                        </div>
+
+                        <div class="upcoming-trips">
+                            <div class="trip-card">
+                                <div class="trip-date">
+                                    <span class="day">15</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="trip-details">
+                                    <div class="trip-route-inline">
+                                        <span>Nairobi</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                                        </svg>
+                                        <span>Kampala</span>
+                                    </div>
+                                    <div class="trip-meta-inline">
+                                        <span>6:00 AM • Modern Safari • Seat A1</span>
+                                    </div>
+                                </div>
+                                <div class="trip-actions">
+                                    <button class="btn-ghost-small" onclick="showView('tracking')">Track</button>
+                                    <button class="btn-ghost-small">View Ticket</button>
+                                </div>
+                            </div>
+
+                            <div class="trip-card">
+                                <div class="trip-date">
+                                    <span class="day">22</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="trip-details">
+                                    <div class="trip-route-inline">
+                                        <span>Kampala</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                                        </svg>
+                                        <span>Kigali</span>
+                                    </div>
+                                    <div class="trip-meta-inline">
+                                        <span>8:00 AM • Jaguar Express • Seat B3</span>
+                                    </div>
+                                </div>
+                                <div class="trip-actions">
+                                    <button class="btn-ghost-small" onclick="showView('tracking')">Track</button>
+                                    <button class="btn-ghost-small">View Ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header-inline">
+                            <h2>Quick Actions</h2>
+                        </div>
+
+                        <div class="quick-actions">
+                            <button class="quick-action" onclick="showView('home')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                </svg>
+                                Book New Trip
+                            </button>
+                            <button class="quick-action" onclick="showView('tracking')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="10" r="3"/>
+                                    <path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/>
+                                </svg>
+                                Track a Ride
+                            </button>
+                            <button class="quick-action" onclick="showView('wallet')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2"/>
+                                    <path d="M1 10h22"/>
+                                </svg>
+                                Add Funds
+                            </button>
+                            <button class="quick-action">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                Get Help
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bookings View -->
+        <section class="view" id="bookingsView">
+            <div class="bookings-page">
+                <div class="bookings-header">
+                    <h1>My Bookings</h1>
+                    <div class="bookings-tabs">
+                        <button class="booking-filter-tab active" data-filter="upcoming">Upcoming</button>
+                        <button class="booking-filter-tab" data-filter="completed">Completed</button>
+                        <button class="booking-filter-tab" data-filter="cancelled">Cancelled</button>
+                    </div>
+                </div>
+
+                <div class="bookings-list" id="bookingsList">
+                    <!-- Bookings populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile View -->
+        <section class="view" id="profileView">
+            <div class="profile-page">
+                <div class="profile-header">
+                    <h1>Profile Settings</h1>
+                </div>
+
+                <div class="profile-content">
+                    <div class="profile-sidebar">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar" id="profileAvatar">JD</div>
+                            <button class="btn-ghost-small">Change Photo</button>
+                        </div>
+
+                        <div class="profile-nav">
+                            <a href="#" class="profile-nav-item active" data-section="personal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                Personal Info
+                            </a>
+                            <a href="#" class="profile-nav-item" data-section="security">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                Security
+                            </a>
+                            <a href="#" class="profile-nav-item" data-section="notifications">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                                </svg>
+                                Notifications
+                            </a>
+                            <a href="#" class="profile-nav-item" data-section="preferences">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                </svg>
+                                Preferences
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="profile-form-section">
+                        <h2>Personal Information</h2>
+                        <form class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" value="John" id="profileFirstName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" value="Doe" id="profileLastName">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" value="john.doe@email.com" id="profileEmail">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" value="+254 712 345 678" id="profilePhone">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>ID Type</label>
+                                    <select id="profileIdType">
+                                        <option value="national" selected>National ID</option>
+                                        <option value="passport">Passport</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ID Number</label>
+                                    <input type="text" value="12345678" id="profileIdNumber">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Country of Residence</label>
+                                <select id="profileCountry">
+                                    <option value="kenya" selected>Kenya</option>
+                                    <option value="uganda">Uganda</option>
+                                    <option value="rwanda">Rwanda</option>
+                                    <option value="southsudan">South Sudan</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wallet View -->
+        <section class="view" id="walletView">
+            <div class="wallet-page">
+                <div class="wallet-header">
+                    <h1>My Wallet</h1>
+                </div>
+
+                <div class="wallet-content">
+                    <div class="wallet-balance-card">
+                        <div class="balance-info">
+                            <span class="balance-label">Available Balance</span>
+                            <span class="balance-amount">$125.00</span>
+                        </div>
+                        <div class="balance-actions">
+                            <button class="btn-primary" onclick="showModal('addFunds')">Add Funds</button>
+                            <button class="btn-secondary">Withdraw</button>
+                        </div>
+                    </div>
+
+                    <div class="wallet-section">
+                        <h2>Loyalty Points</h2>
+                        <div class="points-card">
+                            <div class="points-info">
+                                <span class="points-value">2,450</span>
+                                <span class="points-label">Safari Points</span>
+                            </div>
+                            <div class="points-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 49%"></div>
+                                </div>
+                                <span class="points-next">2,550 more points to Gold status</span>
+                            </div>
+                            <button class="btn-ghost">Redeem Points</button>
+                        </div>
+                    </div>
+
+                    <div class="wallet-section">
+                        <h2>Transaction History</h2>
+                        <div class="transactions-list">
+                            <div class="transaction-item">
+                                <div class="transaction-icon credit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </div>
+                                <div class="transaction-details">
+                                    <span class="transaction-title">Wallet Top-up</span>
+                                    <span class="transaction-date">Jan 10, 2024</span>
+                                </div>
+                                <span class="transaction-amount credit">+$50.00</span>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon debit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14"/>
+                                    </svg>
+                                </div>
+                                <div class="transaction-details">
+                                    <span class="transaction-title">Nairobi → Kampala</span>
+                                    <span class="transaction-date">Jan 8, 2024</span>
+                                </div>
+                                <span class="transaction-amount debit">-$37.00</span>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon credit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </div>
+                                <div class="transaction-details">
+                                    <span class="transaction-title">Refund - Cancelled Trip</span>
+                                    <span class="transaction-date">Jan 5, 2024</span>
+                                </div>
+                                <span class="transaction-amount credit">+$25.00</span>
+                            </div>
+
+                            <div class="transaction-item">
+                                <div class="transaction-icon debit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14"/>
+                                    </svg>
+                                </div>
+                                <div class="transaction-details">
+                                    <span class="transaction-title">Kampala → Kigali</span>
+                                    <span class="transaction-date">Dec 28, 2023</span>
+                                </div>
+                                <span class="transaction-amount debit">-$32.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About View -->
+        <section class="view" id="aboutView">
+            <div class="about-page">
+                <div class="about-hero">
+                    <h1>Connecting East Africa</h1>
+                    <p>Safari Sync is on a mission to make cross-border travel safe, affordable, and seamless for everyone.</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-section">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2020, Safari Sync emerged from a simple observation: traveling between East African countries by bus was unnecessarily complicated. Fragmented operators, unreliable schedules, and lack of transparency made what should be simple journeys into stressful experiences.</p>
+                        <p>We built Safari Sync to change that. By partnering with verified bus operators across Kenya, Uganda, Rwanda, and South Sudan, we've created a unified platform that makes booking and tracking cross-border bus travel as easy as ordering a ride in your city.</p>
+                    </div>
+
+                    <div class="about-values">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <h3>Safety First</h3>
+                            <p>Every operator is vetted. Every bus is tracked. Every journey is monitored.</p>
+                        </div>
+
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <h3>Community</h3>
+                            <p>We're building more than a platform—we're connecting communities across borders.</p>
+                        </div>
+
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                            <h3>Reliability</h3>
+                            <p>Real-time tracking, accurate ETAs, and transparent communication at every step.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Our Impact</h2>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-number">500K+</span>
+                                <span class="impact-label">Passengers Served</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-number">150+</span>
+                                <span class="impact-label">Partner Operators</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-number">2M+</span>
+                                <span class="impact-label">KM Traveled</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-number">4.8</span>
+                                <span class="impact-label">Average Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-overlay" onclick="closeModal('login')"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('login')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-header">
+                <h2>Welcome back</h2>
+                <p>Log in to your Safari Sync account</p>
+            </div>
+
+            <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email or Phone</label>
+                    <input type="text" placeholder="Enter email or phone" id="loginEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-input">
+                        <input type="password" placeholder="Enter password" id="loginPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-row space-between">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary btn-large btn-full">Log in</button>
+
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Facebook
+                    </button>
+                </div>
+
+                <p class="auth-footer">
+                    Don't have an account? <a href="#" onclick="switchModal('login', 'signup')">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-overlay" onclick="closeModal('signup')"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('signup')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="modal-header">
+                <h2>Create account</h2>
+                <p>Join Safari Sync and start your journey</p>
+            </div>
+
+            <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="First name" id="signupFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last name" id="signupLastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter email" id="signupEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <div class="phone-input">
+                        <select id="signupCountryCode">
+                            <option value="+254">+254</option>
+                            <option value="+256">+256</option>
+                            <option value="+250">+250</option>
+                            <option value="+211">+211</option>
+                        </select>
+                        <input type="tel" placeholder="7XX XXX XXX" id="signupPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-input">
+                        <input type="password" placeholder="Create password" id="signupPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('signupPassword')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="form-hint">Must be at least 8 characters</span>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" required> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+
+                <button type="submit" class="btn-primary btn-large btn-full">Create Account</button>
+
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-auth">
+                    <button type="button" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Facebook
+                    </button>
+                </div>
+
+                <p class="auth-footer">
+                    Already have an account? <a href="#" onclick="switchModal('signup', 'login')">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-overlay" onclick="closeModal('success')"></div>
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22,4 12,14.01 9,11.01"/>
+                </svg>
+            </div>
+            <h2>Booking Confirmed!</h2>
+            <p>Your ticket has been sent to your email. Have a great journey!</p>
+
+            <div class="success-details">
+                <div class="success-row">
+                    <span>Booking Reference</span>
+                    <span id="bookingRef">SS-2024-001234</span>
+                </div>
+                <div class="success-row">
+                    <span>Route</span>
+                    <span id="successRoute">Nairobi → Kampala</span>
+                </div>
+                <div class="success-row">
+                    <span>Date</span>
+                    <span id="successDate">Jan 15, 2024</span>
+                </div>
+            </div>
+
+            <div class="success-actions">
+                <button class="btn-primary" onclick="showView('dashboard'); closeModal('success')">View Dashboard</button>
+                <button class="btn-secondary" onclick="showView('tracking'); closeModal('success')">Track Ride</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toast-icon">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22,4 12,14.01 9,11.01"/>
+            </svg>
+            <span id="toastMessage">Action completed successfully</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

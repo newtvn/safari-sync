@@ -4509,3 +4509,8 @@ body.loaded .hero-title.dotted-text span {
     background: var(--accent-primary);
     color: var(--bg-primary);
 }
+/* Word grouping for responsive text to prevent char break */
+.dotted-text .word-group {
+    display: inline-flex;
+    white-space: nowrap;
+}

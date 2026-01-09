@@ -1783,6 +1783,145 @@
                         </div>
                     </div>
 
+                    <!-- Security Section (Initially Hidden) -->
+                    <div class="profile-section" id="securitySection" style="display: none;">
+                        <h2>Security Settings</h2>
+                        <p class="section-desc">Manage your password and account security.</p>
+                        
+                        <div class="security-alert">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            <p>We recommend enabling Two-Factor Authentication (2FA) for enhanced account protection.</p>
+                        </div>
+
+                        <form class="profile-form">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" placeholder="Enter current password">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" placeholder="Confirm new password">
+                            </div>
+
+                            <div class="switch-group">
+                                <div class="switch-label">
+                                    <h3>Two-Factor Authentication</h3>
+                                    <p>Secure your account with 2FA.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <button type="button" class="btn-primary" style="margin-top: 24px;">Update Security</button>
+                        </form>
+                    </div>
+
+                    <!-- Notifications Section (Initially Hidden) -->
+                    <div class="profile-section" id="notificationsSection" style="display: none;">
+                        <h2>Notifications</h2>
+                        <p class="section-desc">Choose how you want to be notified.</p>
+
+                        <div class="switch-group">
+                            <div class="switch-label">
+                                <h3>Booking Confirmations</h3>
+                                <p>Receive booking details via email and SMS</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="switch-group">
+                            <div class="switch-label">
+                                <h3>Trip Reminders</h3>
+                                <p>Get notified 24h & 2h before departure</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="switch-group">
+                            <div class="switch-label">
+                                <h3>Promotions & Deals</h3>
+                                <p>Stay updated on new routes and discounts</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="switch-group">
+                            <div class="switch-label">
+                                <h3>Security Alerts</h3>
+                                <p>Get notified about login attempts</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section (Initially Hidden) -->
+                    <div class="profile-section" id="preferencesSection" style="display: none;">
+                        <h2>Preferences</h2>
+                        <p class="section-desc">Customize your app experience.</p>
+
+                        <div class="pref-select-group">
+                            <label>Language</label>
+                            <div class="pref-select-wrapper">
+                                <select>
+                                    <option>English (US)</option>
+                                    <option>Swahili</option>
+                                    <option>French</option>
+                                </select>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="pref-select-group">
+                            <label>Currency</label>
+                            <div class="pref-select-wrapper">
+                                <select>
+                                    <option>USD ($)</option>
+                                    <option>KES (Ksh)</option>
+                                    <option>UGX (USh)</option>
+                                    <option>RWF (FRw)</option>
+                                </select>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="switch-group">
+                            <div class="switch-label">
+                                <h3>Dark Mode</h3>
+                                <p>Use dark theme for low light</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="profile-form-section">
                         <h2>Personal Information</h2>
                         <form class="profile-form">

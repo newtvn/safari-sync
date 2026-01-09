@@ -1069,17 +1069,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (sectionName === 'files') {
                 targetId = 'filesSection';
             } else if (sectionName === 'personal') {
-                // Personal section is the default form container in existing HTML structure which might be class 'profile-form-section'
-                // But we need to target it specifically. Let's assume the existing form section is for personal info.
-                // We will rely on our new querySelectorAll to find the right elements.
-                // Since the original HTML structure for Personal Info didn't have an ID, we assume it shows up by default.
-                // We'll fix this by ensuring the Personal Info section has an ID or class we can target.
-                // For now, let's treat '.profile-form-section' as the personal info section.
-                 document.querySelector('.profile-form-section').style.display = 'block';
-                 return;
-            } else {
-                 // Placeholder for other sections (Security, Notifications etc - not implemented yet but logic handles hiding)
-                 // If ID doesn't exist, we do nothing or show coming soon
+                document.querySelector('.profile-form-section').style.display = 'block';
+                return;
+            } else if (sectionName === 'security') {
+                targetId = 'securitySection';
+            } else if (sectionName === 'notifications') {
+                targetId = 'notificationsSection';
+            } else if (sectionName === 'preferences') {
+                targetId = 'preferencesSection';
             }
 
             const targetSection = document.getElementById(targetId);
@@ -1096,19 +1093,19 @@ function handleFileUpload(input, docType) {
         const card = input.closest('.file-upload-card');
         const statusBadge = card.querySelector('.file-status');
         const uploadZone = card.querySelector('.upload-zone');
-        
+
         // Simulate upload
         // In a real app, you would use FormData and fetch to send to backend
-        
+
         statusBadge.textContent = 'Pending Review';
         statusBadge.className = 'file-status pending';
-        
+
         uploadZone.classList.add('success');
         uploadZone.innerHTML = `
             <div class="upload-text">${file.name} (${formatFileSize(file.size)})</div>
             <button class="btn-ghost-small" style="margin-top: 8px;">Replace</button>
         `;
-        
+
         showToast(`${docType} uploaded successfully`);
     }
 }
@@ -1154,7 +1151,7 @@ function setBookingMode(mode) {
             </svg>
             Send Parcel
         `;
-        
+
         // Update Tracking Title contextually
         const trackingTitle = document.getElementById('trackingTitle');
         const trackingSubtitle = document.getElementById('trackingSubtitle');
@@ -1187,12 +1184,12 @@ function triggerSOS() {
         sosButton.innerHTML = 'ALERT SENT!';
         sosButton.style.background = '#000';
         sosButton.classList.remove('pulse-animation');
-        
+
         showToast('SOS ALERT SENT! Help is on the way.');
-        
+
         // In a real app, this would get geolocation and send to backend
         console.log('SOS Triggered at: ' + new Date().toISOString());
-        
+
         setTimeout(() => {
             // Reset for demo
             sosButton.innerHTML = `

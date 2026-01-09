@@ -1254,113 +1254,194 @@
 
         <!-- Tracking View -->
         <section class="view" id="trackingView">
-            <div class="tracking-page">
-                <div class="tracking-header">
-                    <h1>Track Your Ride</h1>
-                    <p>Enter your booking reference to track your bus in real-time</p>
-                </div>
-
-                <div class="tracking-search">
-                    <div class="tracking-input-group">
-                        <input type="text" placeholder="Enter booking reference (e.g., SS-2024-001234)" id="trackingInput">
-                        <button class="btn-primary" onclick="trackRide()">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="M21 21l-4.35-4.35"/>
+            <div class="tracking-dashboard">
+                <!-- Sidebar -->
+                <div class="tracking-sidebar">
+                    <div class="sidebar-header">
+                        <div class="search-bar">
+                            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
-                            Track
-                        </button>
+                            <input type="text" placeholder="Search shipment..." />
+                        </div>
+                    </div>
+
+                    <h2 class="section-title">Ongoing Trips</h2>
+
+                    <div class="shipment-list">
+                        <!-- Card 1 (Active) -->
+                        <div class="shipment-card active">
+                            <div class="shipment-header">
+                                <span class="label">Shipment number</span>
+                                <span class="value">SS-2026-00342</span>
+                                <div class="truck-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="1" y="3" width="15" height="13"></rect>
+                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="route-timeline">
+                                <div class="timeline-point start">
+                                    <div class="dot"></div>
+                                    <div class="info">
+                                        <strong class="location">Nairobi, Kenya</strong>
+                                        <span class="address">River Road Terminal</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-line"></div>
+                                <div class="timeline-point end">
+                                    <div class="icon-pin">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                    </div>
+                                    <div class="info">
+                                        <strong class="location">Kampala, Uganda</strong>
+                                        <span class="address">Namayiba Bus Park</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="client-info">
+                                <div class="avatar">JD</div>
+                                <div class="details">
+                                    <span class="role">Passenger</span>
+                                    <span class="name">John Doe</span>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="shipment-card">
+                            <div class="shipment-header">
+                                <span class="label">Shipment number</span>
+                                <span class="value">SS-2026-00918</span>
+                                <div class="truck-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="1" y="3" width="15" height="13"></rect>
+                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="route-timeline">
+                                <div class="timeline-point start">
+                                    <div class="dot"></div>
+                                    <div class="info">
+                                        <strong class="location">Mombasa, Kenya</strong>
+                                        <span class="address">Mwembe Tayari</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-line"></div>
+                                <div class="timeline-point end">
+                                    <div class="icon-pin">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                    </div>
+                                    <div class="info">
+                                        <strong class="location">Kigali, Rwanda</strong>
+                                        <span class="address">Nyabugogo Park</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="client-info">
+                                <div class="avatar secondary">AS</div>
+                                <div class="details">
+                                    <span class="role">Passenger</span>
+                                    <span class="name">Alice Smith</span>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="tracking-result" id="trackingResult" style="display: none;">
-                    <div class="tracking-map" id="trackingMap">
-                        <div class="map-placeholder">
-                            <div class="map-route-line"></div>
-                            <div class="map-bus-marker" id="busMarker">
-                                <svg viewBox="0 0 40 40">
-                                    <rect x="3" y="12" width="34" height="18" rx="3" fill="currentColor"/>
-                                    <circle cx="10" cy="32" r="3.5" fill="currentColor"/>
-                                    <circle cx="30" cy="32" r="3.5" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="map-point origin">
-                                <span>Nairobi</span>
-                            </div>
-                            <div class="map-point destination">
-                                <span>Kampala</span>
-                            </div>
+                <!-- Map Area -->
+                <div class="tracking-map-panel">
+                    <svg class="map-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+                            </pattern>
+                            <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="dropshadow" height="130%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                <feOffset dx="2" dy="2" result="offsetblur"/>
+                                <feFlood flood-color="rgba(0,0,0,0.5)"/>
+                                <feComposite in2="offsetblur" operator="in"/>
+                                <feMerge> 
+                                    <feMergeNode/>
+                                    <feMergeNode in="SourceGraphic"/> 
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Map Background Pattern -->
+                        <rect width="800" height="600" fill="#121212"/>
+                        <rect width="800" height="600" fill="url(#grid)" opacity="0.3"/>
+
+                        <!-- Roads / Geo Shapes (Abstract) -->
+                        <path d="M -50 400 Q 200 450 400 300 Q 600 150 850 200" fill="none" stroke="#222" stroke-width="20"/>
+                        <path d="M 200 -50 250 200 Q 300 400 200 650" fill="none" stroke="#222" stroke-width="15"/>
+
+                        <!-- The Dotted Route Path -->
+                        <!-- This path connects the two markers -->
+                        <path class="tracking-route" d="M 200 400 C 250 350, 300 300, 400 300 S 550 400, 600 200" 
+                              fill="none" 
+                              stroke="url(#pathGradient)" 
+                              stroke-width="5" 
+                              stroke-dasharray="10 10" 
+                              stroke-linecap="round"/>
+
+                        <!-- Live Position Marker on Path -->
+                        <circle r="8" fill="#a855f7" filter="url(#dropshadow)">
+                            <animateMotion dur="10s" repeatCount="indefinite" path="M 200 400 C 250 350, 300 300, 400 300 S 550 400, 600 200" />
+                        </circle>
+                        
+                        <!-- Start Point Marker (HTML Overlay simulated in SVG for simplicity or mixed) -->
+                        <g transform="translate(200, 400)">
+                            <circle r="12" fill="#22c55e" opacity="0.2"/>
+                            <circle r="6" fill="#22c55e"/>
+                        </g>
+
+                        <!-- End Point Marker -->
+                        <g transform="translate(600, 200)">
+                            <circle r="12" fill="#a855f7" opacity="0.2"/>
+                            <circle r="6" fill="#a855f7"/>
+                        </g>
+                    </svg>
+
+                    <!-- Overlay Cards on Map -->
+                    <div class="map-overlay-card start-card" style="top: 380px; left: 80px;">
+                        <div class="dot green"></div>
+                        <div class="text">
+                            <strong>Nairobi</strong>
+                            <span>Dep: 08:00 AM</span>
                         </div>
                     </div>
 
-                    <div class="tracking-info">
-                        <div class="tracking-status">
-                            <div class="status-badge on-route">
-                                <span class="pulse"></span>
-                                On Route
-                            </div>
-                            <span class="last-updated">Last updated: 2 minutes ago</span>
-                        </div>
-
-                        <div class="tracking-details">
-                            <div class="tracking-card">
-                                <h3>Journey Progress</h3>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 65%"></div>
-                                </div>
-                                <div class="progress-info">
-                                    <span>65% Complete</span>
-                                    <span>~3h 30m remaining</span>
-                                </div>
-                            </div>
-
-                            <div class="tracking-card">
-                                <h3>Current Location</h3>
-                                <p class="location-text">Near Busia Border Point</p>
-                                <p class="location-subtext">Kenya-Uganda Border</p>
-                            </div>
-
-                            <div class="tracking-card">
-                                <h3>ETA</h3>
-                                <p class="eta-time">4:30 PM</p>
-                                <p class="eta-status on-time">On Time</p>
-                            </div>
-
-                            <div class="tracking-card">
-                                <h3>Bus Details</h3>
-                                <div class="bus-details-info">
-                                    <div class="detail-row">
-                                        <span>Operator</span>
-                                        <span>Modern Safari</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span>Bus Number</span>
-                                        <span>KCA 456B</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span>Driver</span>
-                                        <span>James Mwangi</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tracking-actions">
-                            <button class="btn-secondary" onclick="shareLocation()">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="18" cy="5" r="3"/>
-                                    <circle cx="6" cy="12" r="3"/>
-                                    <circle cx="18" cy="19" r="3"/>
-                                    <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
-                                </svg>
-                                Share Location
-                            </button>
-                            <button class="btn-secondary" onclick="contactDriver()">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                                </svg>
-                                Contact Driver
-                            </button>
+                    <div class="map-overlay-card end-card" style="top: 150px; left: 630px;">
+                        <div class="dot purple"></div>
+                        <div class="text">
+                            <strong>Kampala</strong>
+                            <span>Arr: 04:30 PM</span>
                         </div>
                     </div>
                 </div>

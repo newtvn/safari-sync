@@ -854,9 +854,13 @@ body.loaded .hero-title.dotted-text span {
 
 .hero-booking {
     flex: 1;
-    max-width: 800px;
+    width: 100%;
+    /* Ensure full width potential */
+    max-width: none;
+    /* Allow it to grow */
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    /* Center vertically for the taller card */
     justify-content: flex-end;
 }
 
@@ -1040,6 +1044,14 @@ body.loaded .hero-title.dotted-text span {
     margin-left: auto;
 }
 
+/* Map Text Styling */
+.dotted-map-text {
+    font-family: 'Codystar', display;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* Booking Card */
 .booking-card {
     background: rgba(26, 26, 26, 0.85);
@@ -1047,10 +1059,16 @@ body.loaded .hero-title.dotted-text span {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-xl);
-    padding: 40px;
+    padding: 60px 40px;
+    /* Increased padding for height */
     box-shadow: var(--shadow-xl);
     width: 100%;
-    max-width: 100%;
+    /* removed max-width: 100% redundancy, ensuring it fills container */
+    min-height: 500px;
+    /* Force minimum height to maximize space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {

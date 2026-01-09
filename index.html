@@ -186,90 +186,90 @@
                         </defs>
 
                         <!-- Connection Lines with Animation -->
-                        <!-- Juba to Kampala -->
-                        <path class="route-line" d="M 295 145 Q 280 280 305 385" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                        <!-- Juba (300, 100) to Kampala (260, 360) -->
+                        <path class="route-line" d="M 300 100 Q 280 230 260 360" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
                             <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
                         </path>
 
-                        <!-- Kampala to Nairobi -->
-                        <path class="route-line" d="M 305 385 Q 400 420 475 400" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
-                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        <!-- Kampala (260, 360) to Nairobi (480, 380) -->
+                        <path class="route-line" d="M 260 360 Q 370 340 480 380" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                             <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
                         </path>
 
-                        <!-- Kampala to Kigali -->
-                        <path class="route-line" d="M 305 385 Q 280 440 265 498" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
-                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        <!-- Kampala (260, 360) to Kigali (220, 520) -->
+                        <path class="route-line" d="M 260 360 Q 220 440 220 520" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                             <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
                         </path>
 
-                        <!-- Nairobi to Kigali -->
-                        <path class="route-line" d="M 475 400 Q 370 460 265 498" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
-                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+                        <!-- Nairobi (480, 380) to Kigali (220, 520) -->
+                        <path class="route-line" d="M 480 380 Q 350 480 220 520" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
+                             <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
                         </path>
 
-                        <!-- Nairobi to Dar es Salaam -->
-                        <path class="route-line" d="M 475 400 Q 500 500 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
-                            <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        <!-- Nairobi (480, 380) to Dar es Salaam (480, 600) -->
+                        <path class="route-line" d="M 480 380 Q 520 490 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                             <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
                         </path>
 
-                        <!-- Kigali to Dar es Salaam -->
-                        <path class="route-line" d="M 265 498 Q 370 560 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
-                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+                        <!-- Kigali (220, 520) to Dar es Salaam (480, 600) -->
+                        <path class="route-line" d="M 220 520 Q 350 580 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
+                             <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
                         </path>
 
                         <!-- City Points -->
-                        <!-- Juba - South Sudan -->
+                        <!-- Juba - Top Center -->
                         <g class="city-point" filter="url(#softGlow)">
-                            <circle cx="295" cy="145" r="18" fill="url(#cityGlow)">
+                            <circle cx="300" cy="100" r="18" fill="url(#cityGlow)">
                                 <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite"/>
                             </circle>
-                            <circle cx="295" cy="145" r="8" fill="#ffffff" opacity="0.4"/>
-                            <circle cx="295" cy="145" r="4" fill="#ffffff"/>
-                            <text x="295" y="122" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">JUBA</text>
-                            <text x="295" y="175" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">South Sudan</text>
+                            <circle cx="300" cy="100" r="8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="300" cy="100" r="4" fill="#ffffff"/>
+                            <text x="300" y="70" text-anchor="middle" fill="#ffffff" font-size="14" class="dotted-map-text">JUBA</text>
+                            <text x="300" y="85" text-anchor="middle" fill="#737373" font-size="10" font-family="DM Sans, sans-serif">South Sudan</text>
                         </g>
 
-                        <!-- Kampala - Uganda -->
+                        <!-- Kampala - Mid Left -->
                         <g class="city-point" filter="url(#softGlow)">
-                            <circle cx="305" cy="385" r="20" fill="url(#cityGlow)">
+                            <circle cx="260" cy="360" r="20" fill="url(#cityGlow)">
                                 <animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite" begin="0.5s"/>
                             </circle>
-                            <circle cx="305" cy="385" r="10" fill="#ffffff" opacity="0.4"/>
-                            <circle cx="305" cy="385" r="5" fill="#ffffff"/>
-                            <text x="305" y="362" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">KAMPALA</text>
-                            <text x="305" y="415" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Uganda</text>
+                            <circle cx="260" cy="360" r="10" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="260" cy="360" r="5" fill="#ffffff"/>
+                            <text x="260" y="325" text-anchor="middle" fill="#ffffff" font-size="14" class="dotted-map-text">KAMPALA</text>
+                            <text x="260" y="340" text-anchor="middle" fill="#737373" font-size="10" font-family="DM Sans, sans-serif">Uganda</text>
                         </g>
 
-                        <!-- Nairobi - Kenya -->
+                        <!-- Nairobi - Mid Right -->
                         <g class="city-point" filter="url(#softGlow)">
-                            <circle cx="475" cy="400" r="22" fill="url(#cityGlow)">
+                            <circle cx="480" cy="380" r="22" fill="url(#cityGlow)">
                                 <animate attributeName="r" values="22;30;22" dur="3s" repeatCount="indefinite" begin="1s"/>
                             </circle>
-                            <circle cx="475" cy="400" r="11" fill="#ffffff" opacity="0.4"/>
-                            <circle cx="475" cy="400" r="5.5" fill="#ffffff"/>
-                            <text x="475" y="377" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">NAIROBI</text>
-                            <text x="475" y="432" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Kenya</text>
+                            <circle cx="480" cy="380" r="11" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="480" cy="380" r="5.5" fill="#ffffff"/>
+                            <text x="480" y="345" text-anchor="middle" fill="#ffffff" font-size="14" class="dotted-map-text">NAIROBI</text>
+                            <text x="480" y="360" text-anchor="middle" fill="#737373" font-size="10" font-family="DM Sans, sans-serif">Kenya</text>
                         </g>
-
-                        <!-- Kigali - Rwanda -->
+                        
+                        <!-- Kigali - Bottom Left -->
                         <g class="city-point" filter="url(#softGlow)">
-                            <circle cx="265" cy="498" r="18" fill="url(#cityGlow)">
+                            <circle cx="220" cy="520" r="18" fill="url(#cityGlow)">
                                 <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite" begin="1.5s"/>
                             </circle>
-                            <circle cx="265" cy="498" r="8" fill="#ffffff" opacity="0.4"/>
-                            <circle cx="265" cy="498" r="4" fill="#ffffff"/>
-                            <text x="265" y="475" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600" font-family="DM Sans, sans-serif">KIGALI</text>
-                            <text x="265" y="528" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Rwanda</text>
+                            <circle cx="220" cy="520" r="8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="220" cy="520" r="4" fill="#ffffff"/>
+                            <text x="220" y="490" text-anchor="middle" fill="#ffffff" font-size="14" class="dotted-map-text">KIGALI</text>
+                            <text x="220" y="505" text-anchor="middle" fill="#737373" font-size="10" font-family="DM Sans, sans-serif">Rwanda</text>
                         </g>
 
-                        <!-- Dar es Salaam - Tanzania -->
+                        <!-- Dar es Salaam - Bottom Right -->
                         <g class="city-point" filter="url(#softGlow)">
-                            <circle cx="480" cy="600" r="20" fill="url(#cityGlow)">
-                                <animate attributeName="r" values="20;26;20" dur="3s" repeatCount="indefinite" begin="2s"/>
+                             <circle cx="480" cy="600" r="18" fill="url(#cityGlow)">
+                                <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite" begin="2s"/>
                             </circle>
-                            <circle cx="480" cy="600" r="9" fill="#ffffff" opacity="0.4"/>
-                            <circle cx="480" cy="600" r="4.5" fill="#ffffff"/>
-                            <text x="480" y="577" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600" font-family="DM Sans, sans-serif">DAR ES SALAAM</text>
-                            <text x="480" y="630" text-anchor="middle" fill="#737373" font-size="9" font-family="DM Sans, sans-serif">Tanzania</text>
+                            <circle cx="480" cy="600" r="8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="480" cy="600" r="4" fill="#ffffff"/>
+                            <text x="480" y="635" text-anchor="middle" fill="#ffffff" font-size="14" class="dotted-map-text">DAR ES SALAAM</text>
+                             <text x="480" y="650" text-anchor="middle" fill="#737373" font-size="10" font-family="DM Sans, sans-serif">Tanzania</text>
                         </g>
 
                         <!-- Animated traveling dots - Bidirectional -->

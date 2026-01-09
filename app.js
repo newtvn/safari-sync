@@ -108,6 +108,7 @@ function initPreloader() {
 
     setTimeout(() => {
         preloader.classList.add('hidden');
+        document.body.classList.add('loaded');
     }, 1800);
 }
 

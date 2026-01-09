@@ -204,6 +204,11 @@
 
 
 
+                        <!-- Nairobi (480, 380) to Dar es Salaam (480, 600) -->
+                        <path class="route-line" d="M 480 380 L 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="2" stroke-dasharray="8 4" filter="url(#glow)">
+                             <animate attributeName="stroke-dashoffset" from="0" to="24" dur="1.5s" repeatCount="indefinite"/>
+                        </path>
+
                         <!-- Kigali (220, 520) to Dar es Salaam (480, 600) -->
                         <path class="route-line" d="M 220 520 L 480 600" fill="none" stroke="url(#lineGradient)" stroke-width="1.5" stroke-dasharray="6 4" filter="url(#glow)" opacity="0.5">
                              <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
@@ -292,6 +297,14 @@
                         <path id="path3" d="M 260 360 L 220 520" fill="none" stroke="none"/>
 
 
+
+                        <!-- Nairobi (480, 380) <-> Dar es Salaam (480, 600) -->
+                        <circle r="3.5" fill="#ffffff" filter="url(#glow)">
+                            <animateMotion dur="5s" repeatCount="indefinite" begin="2s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+                                <mpath href="#path5"/>
+                            </animateMotion>
+                        </circle>
+                        <path id="path5" d="M 480 380 L 480 600" fill="none" stroke="none"/>
 
                         <!-- Kigali (220, 520) <-> Dar es Salaam (480, 600) -->
                         <circle r="3" fill="#ffffff" filter="url(#glow)" opacity="0.7">

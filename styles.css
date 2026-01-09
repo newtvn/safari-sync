@@ -4203,6 +4203,10 @@ body.loaded .hero-title.dotted-text span {
         gap: 48px;
     }
 
+    /* Force single column for smaller screens within this range if needed,
+       but usually 1200px acts as tablet landscape.
+       However, to fix the user's issue, we will make sure 900px overrides this.
+    */
     .routes-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -4213,6 +4217,20 @@ body.loaded .hero-title.dotted-text span {
 
     .dashboard-stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Add a specific override here at the bottom of the file to ensure it takes precedence */
+@media (max-width: 900px) {
+
+    .routes-grid,
+    .features-grid,
+    .dashboard-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    .feature-card.col-span-2 {
+        grid-column: auto !important;
     }
 }
 

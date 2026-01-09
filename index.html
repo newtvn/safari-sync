@@ -269,53 +269,46 @@
                         </g>
 
                         <!-- Animated traveling dots - Bidirectional -->
-                        <!-- Juba <-> Kampala -->
+                        
+                        <!-- Juba (300, 100) <-> Kampala (260, 360) -->
                         <circle r="3.5" fill="#ffffff" filter="url(#glow)">
                             <animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
                                 <mpath href="#path1"/>
                             </animateMotion>
                         </circle>
-                        <path id="path1" d="M 295 145 Q 280 280 305 385" fill="none" stroke="none"/>
+                        <path id="path1" d="M 300 100 L 260 360" fill="none" stroke="none"/>
 
-                        <!-- Kampala <-> Nairobi -->
+                        <!-- Kampala (260, 360) <-> Nairobi (480, 380) -->
                         <circle r="3.5" fill="#ffffff" filter="url(#glow)">
                             <animateMotion dur="5s" repeatCount="indefinite" begin="0.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
                                 <mpath href="#path2"/>
                             </animateMotion>
                         </circle>
-                        <path id="path2" d="M 305 385 Q 400 420 475 400" fill="none" stroke="none"/>
+                        <path id="path2" d="M 260 360 L 480 380" fill="none" stroke="none"/>
 
-                        <!-- Kampala <-> Kigali -->
+                        <!-- Kampala (260, 360) <-> Kigali (220, 520) -->
                         <circle r="3.5" fill="#ffffff" filter="url(#glow)">
                             <animateMotion dur="5.5s" repeatCount="indefinite" begin="1s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
                                 <mpath href="#path3"/>
                             </animateMotion>
                         </circle>
-                        <path id="path3" d="M 305 385 Q 280 440 265 498" fill="none" stroke="none"/>
+                        <path id="path3" d="M 260 360 L 220 520" fill="none" stroke="none"/>
 
-                        <!-- Nairobi <-> Kigali -->
-                        <circle r="3" fill="#ffffff" filter="url(#glow)" opacity="0.7">
-                            <animateMotion dur="6s" repeatCount="indefinite" begin="1.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
-                                <mpath href="#path4"/>
-                            </animateMotion>
-                        </circle>
-                        <path id="path4" d="M 475 400 Q 370 460 265 498" fill="none" stroke="none"/>
-
-                        <!-- Nairobi <-> Dar es Salaam -->
+                        <!-- Nairobi (480, 380) <-> Dar es Salaam (480, 600) -->
                         <circle r="3.5" fill="#ffffff" filter="url(#glow)">
                             <animateMotion dur="5s" repeatCount="indefinite" begin="2s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
                                 <mpath href="#path5"/>
                             </animateMotion>
                         </circle>
-                        <path id="path5" d="M 475 400 Q 500 500 480 600" fill="none" stroke="none"/>
+                        <path id="path5" d="M 480 380 L 480 600" fill="none" stroke="none"/>
 
-                        <!-- Kigali <-> Dar es Salaam -->
+                        <!-- Kigali (220, 520) <-> Dar es Salaam (480, 600) -->
                         <circle r="3" fill="#ffffff" filter="url(#glow)" opacity="0.7">
                             <animateMotion dur="6.5s" repeatCount="indefinite" begin="2.5s" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
                                 <mpath href="#path6"/>
                             </animateMotion>
                         </circle>
-                        <path id="path6" d="M 265 498 Q 370 560 480 600" fill="none" stroke="none"/>
+                        <path id="path6" d="M 220 520 L 480 600" fill="none" stroke="none"/>
 
                         </svg>
                     </div>

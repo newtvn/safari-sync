@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet (vendored locally in vendor/leaflet/ - no CDN dependency): real interactive map
+         (OpenStreetMap tiles) for live bus tracking, no API key/billing required unlike Google
+         Maps' JS SDK. See app.js ensureMap() for the Google Maps swap-in note. -->
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <script src="vendor/leaflet/leaflet.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -86,6 +91,15 @@
                         </svg>
                         Wallet
                     </a>
+                    <a href="#" onclick="showView('operator')" class="operator-only" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <path d="M16 8h4l3 3v5h-7V8z"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Operator Portal
+                    </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" onclick="logout()" class="logout-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -122,6 +136,7 @@
                 <a href="#" onclick="showView('dashboard')">Dashboard</a>
                 <a href="#" onclick="showView('bookings')">My Bookings</a>
                 <a href="#" onclick="showView('profile')">Profile</a>
+                <a href="#" onclick="showView('operator')" class="operator-only" style="display:none;">Operator Portal</a>
                 <a href="#" onclick="logout()">Log out</a>
             </div>
         </div>
@@ -748,7 +763,7 @@
                             <a href="#">Help Center</a>
                             <a href="#">Safety</a>
                             <a href="#">Lost & Found</a>
-                            <a href="#">Accessibility</a>
+                            <a href="#" onclick="window.open((window.SAFARI_SYNC_API_BASE || 'http://localhost:8000') + '/api/ussd/simulator', '_blank')">USSD Demo (No App Needed)</a>
                         </div>
 
                         <div class="footer-links">
@@ -1283,21 +1298,16 @@
 
                 <div class="tracking-result" id="trackingResult" style="display: none;">
                     <div class="tracking-map" id="trackingMap">
-                        <div class="map-placeholder">
-                            <div class="map-route-line"></div>
-                            <div class="map-bus-marker" id="busMarker">
-                                <svg viewBox="0 0 40 40">
-                                    <rect x="3" y="12" width="34" height="18" rx="3" fill="currentColor"/>
-                                    <circle cx="10" cy="32" r="3.5" fill="currentColor"/>
-                                    <circle cx="30" cy="32" r="3.5" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="map-point origin">
-                                <span>Nairobi</span>
-                            </div>
-                            <div class="map-point destination">
-                                <span>Kampala</span>
-                            </div>
+                        <div id="liveMap" style="width:100%;height:100%;min-height:400px;border-radius:var(--radius-lg);overflow:hidden;"></div>
+                        <div class="map-open-links">
+                            <button class="btn-ghost-small" id="openGoogleMapsBtn" onclick="openInGoogleMaps()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+                                Open in Google Maps
+                            </button>
+                            <button class="btn-ghost-small" id="openWazeBtn" onclick="openInWaze()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+                                Open in Waze
+                            </button>
                         </div>
                     </div>
 
@@ -1574,20 +1584,20 @@
                             <div class="ticket-route-large">
                                 <div class="city-group">
                                     <span class="city-label">FROM</span>
-                                    <span class="city-code">NBO</span>
-                                    <span class="city-name">Nairobi</span>
+                                    <span class="city-code" id="ticketFromCode">NBO</span>
+                                    <span class="city-name" id="ticketFromName">Nairobi</span>
                                 </div>
                                 <div class="route-arrow">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <line x1="0" y1="12" x2="24" y2="12" stroke-dasharray="4 4"/>
                                         <path d="M18 6l6 6-6 6"/>
                                     </svg>
-                                    <span class="trip-duration">10h</span>
+                                    <span class="trip-duration" id="ticketDuration">10h</span>
                                 </div>
                                 <div class="city-group right">
                                     <span class="city-label">TO</span>
-                                    <span class="city-code">KLA</span>
-                                    <span class="city-name">Kampala</span>
+                                    <span class="city-code" id="ticketToCode">KLA</span>
+                                    <span class="city-name" id="ticketToName">Kampala</span>
                                 </div>
                             </div>
                         </div>
@@ -1602,31 +1612,31 @@
                             <div class="detail-grid">
                                 <div class="detail-item">
                                     <span class="detail-label">DATE</span>
-                                    <span class="detail-value">Jan 15, 2024</span>
+                                    <span class="detail-value" id="ticketDate">Jan 15, 2024</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">TIME</span>
-                                    <span class="detail-value">06:00 AM</span>
+                                    <span class="detail-value" id="ticketTime">06:00 AM</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">BUS OPERATOR</span>
-                                    <span class="detail-value">Modern Safari</span>
+                                    <span class="detail-value" id="ticketOperator">Modern Safari</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">BUS NUMBER</span>
-                                    <span class="detail-value">KCA 456B</span>
+                                    <span class="detail-value" id="ticketBusPlate">KCA 456B</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">SEAT</span>
-                                    <span class="detail-value accent">A1</span>
+                                    <span class="detail-value accent" id="ticketSeat">A1</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">CLASS</span>
-                                    <span class="detail-value">VIP</span>
+                                    <span class="detail-value" id="ticketClass">Standard</span>
                                 </div>
                                 <div class="detail-item full-width">
                                     <span class="detail-label">PASSENGER</span>
-                                    <span class="detail-value">Newtvn</span>
+                                    <span class="detail-value" id="ticketPassenger">-</span>
                                 </div>
                             </div>
                         </div>
@@ -2148,6 +2158,56 @@
                 </div>
             </div>
         </section>
+
+        <!-- Operator Portal View -->
+        <section class="view" id="operatorView">
+            <div class="dashboard-page">
+                <div class="dashboard-header">
+                    <h1>Operator Portal</h1>
+                    <p>Manage your fleet, start live tracking, scan tickets and review passenger manifests.</p>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <div class="section-header-inline"><h2>My Operator Profile</h2></div>
+                        <div id="operatorSummary" style="padding:16px;background:var(--bg-card);border:3px dotted var(--border-color);border-radius:var(--radius-lg);color:var(--text-secondary);">
+                            Loading...
+                        </div>
+                        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+                            <input type="text" id="opCompanyName" placeholder="Not registered yet? Enter company name" style="flex:1;min-width:220px;padding:12px;background:var(--bg-elevated);border:3px dotted var(--border-color);border-radius:var(--radius-md);color:var(--text-primary);">
+                            <button class="btn-secondary" onclick="opRegister()">Register as Operator</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header-inline"><h2>Start Live Tracking</h2></div>
+                        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px;">Enter a schedule ID (find one via <a href="#" onclick="window.open(API_BASE + '/docs','_blank')" style="color:var(--accent-secondary);">the API docs</a> or a manifest lookup below) to start the real-time GPS simulation for that trip.</p>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <input type="text" id="opScheduleId" placeholder="Schedule ID" style="flex:1;min-width:220px;padding:12px;background:var(--bg-elevated);border:3px dotted var(--border-color);border-radius:var(--radius-md);color:var(--text-primary);">
+                            <button class="btn-primary" onclick="opStartTrip()">Start Trip</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header-inline"><h2>Scan Boarding Ticket</h2></div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <input type="text" id="opTicketCode" placeholder="Ticket code, e.g. TKT-ABC12345" style="flex:1;min-width:220px;padding:12px;background:var(--bg-elevated);border:3px dotted var(--border-color);border-radius:var(--radius-md);color:var(--text-primary);">
+                            <button class="btn-primary" onclick="opScanTicket()">Scan &amp; Board</button>
+                        </div>
+                        <div id="opScanResult" style="margin-top:12px;"></div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <div class="section-header-inline"><h2>Passenger Manifest</h2></div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+                            <input type="text" id="opManifestScheduleId" placeholder="Schedule ID" style="flex:1;min-width:220px;padding:12px;background:var(--bg-elevated);border:3px dotted var(--border-color);border-radius:var(--radius-md);color:var(--text-primary);">
+                            <button class="btn-secondary" onclick="opLoadManifest()">Load Manifest</button>
+                        </div>
+                        <div id="opManifestTable" style="color:var(--text-secondary);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Login Modal -->
@@ -2346,7 +2406,7 @@
 
             <div class="success-actions">
                 <button class="btn-primary" onclick="showView('dashboard'); closeModal('success')">View Dashboard</button>
-                <button class="btn-secondary" onclick="showView('tracking'); closeModal('success')">Track Ride</button>
+                <button class="btn-secondary" onclick="closeModal('success'); trackBookingRef(state.currentBooking.booking_ref)">Track Ride</button>
             </div>
         </div>
     </div>

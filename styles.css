@@ -2885,6 +2885,48 @@ body.loaded .hero-title.dotted-text span {
     border-radius: var(--radius-lg);
     overflow: hidden;
     min-height: 400px;
+    position: relative;
+}
+
+.map-open-links {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+.map-open-links .btn-ghost-small {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(6px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bus-live-icon {
+    background: var(--accent-primary);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-primary);
+    box-shadow: 0 0 16px var(--accent-glow);
+    animation: busPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes busPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .map-placeholder {

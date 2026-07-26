@@ -32,6 +32,7 @@ for the full API and architecture writeup).
 
 | Feature | Description |
 | :--- | :--- |
+| **Google Sign-In** | Real Google OAuth login (server-verifies the ID token) - one env var to turn on, see `backend/README.md`. |
 | **Real Inventory & Booking** | Live seat maps, seat holds, and bookings persisted in a real database - not hardcoded arrays. |
 | **Sandbox Mobile Money** | M-Pesa / MTN / Airtel / Card payment flow with a pluggable provider abstraction, ready to swap in real Daraja/MoMo credentials. |
 | **Verified E-Tickets** | Real QR-coded tickets; a conductor "scan to board" endpoint blocks re-use of an already-boarded ticket. |

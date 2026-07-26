@@ -79,7 +79,57 @@ document.addEventListener('DOMContentLoaded', () => {
     initSeats();
     setMinDate();
     restoreSession();
+    initGoogleSignIn();
 });
+
+// ==========================================
+// Google Sign-In (Google Identity Services)
+//
+// The Client ID lives on the backend (GOOGLE_CLIENT_ID env var) so it's configured
+// in exactly one place; the frontend just asks for it. If it's not set, the button
+// slots render a "not configured" placeholder (see .google-btn-slot:empty in
+// styles.css) instead of a dead-looking button.
+// ==========================================
+
+async function initGoogleSignIn() {
+    let clientId = '';
+    try {
+        const config = await api('/api/auth/google-client-id', { auth: false });
+        clientId = config.client_id;
+    } catch (e) {
+        return; // backend unreachable - leave the placeholder showing
+    }
+    if (!clientId) return;
+
+    waitForGoogleIdentityServices(() => {
+        google.accounts.id.initialize({ client_id: clientId, callback: handleGoogleCredentialResponse });
+        const buttonOptions = { theme: 'filled_black', size: 'large', shape: 'pill', text: 'continue_with', logo_alignment: 'center' };
+        const loginSlot = document.getElementById('googleSignInBtnLogin');
+        const signupSlot = document.getElementById('googleSignInBtnSignup');
+        if (loginSlot) google.accounts.id.renderButton(loginSlot, { ...buttonOptions, width: loginSlot.offsetWidth || 260 });
+        if (signupSlot) google.accounts.id.renderButton(signupSlot, { ...buttonOptions, width: signupSlot.offsetWidth || 260 });
+    });
+}
+
+function waitForGoogleIdentityServices(callback, attemptsLeft = 25) {
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+        callback();
+    } else if (attemptsLeft > 0) {
+        setTimeout(() => waitForGoogleIdentityServices(callback, attemptsLeft - 1), 200);
+    }
+}
+
+async function handleGoogleCredentialResponse(response) {
+    try {
+        const result = await api('/api/auth/google', { method: 'POST', body: { credential: response.credential }, auth: false });
+        applySession(result);
+        closeModal('login');
+        closeModal('signup');
+        showToast(`Welcome, ${state.user.first_name}!`);
+    } catch (err) {
+        showToast(err.message);
+    }
+}
 
 async function restoreSession() {
     const savedToken = localStorage.getItem('safariSyncToken');

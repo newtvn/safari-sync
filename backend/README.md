@@ -67,6 +67,29 @@ app/
   rejects any further scan of the same ticket (`409 Ticket already used for
   boarding`) - the reason a QR ticket is meaningfully harder to resell than a
   screenshot.
+- **Google Sign-In** verifies a real Google ID token server-side (`google-auth`
+  library) and finds-or-creates a `User` by the verified email - see below to turn
+  it on. Facebook login is intentionally left disabled in the UI (greyed out) since
+  it needs its own Meta App ID and isn't wired up yet.
+
+## Turning on Google Sign-In
+
+1. In [Google Cloud Console](https://console.cloud.google.com/apis/credentials),
+   create an **OAuth 2.0 Client ID** of type "Web application".
+2. Under "Authorized JavaScript origins", add every origin the frontend is served
+   from (e.g. `http://localhost:5500` for local dev, and your real production
+   domain, e.g. `https://safari-sync.vercel.app`). No redirect URI is needed - the
+   frontend uses Google Identity Services' popup/One Tap flow, not a redirect.
+3. Set `GOOGLE_CLIENT_ID` to that Client ID in the backend's environment.
+4. That's it - the frontend fetches the Client ID from `GET /api/auth/google-client-id`
+   at load time, so there's only one place to configure it. Until it's set, the
+   login/signup modals show a "Google Sign-In not configured" placeholder instead of
+   a dead-looking button.
+
+Note the Client ID must match the origin the page is actually served from -
+Google will refuse to render/verify sign-in if the page's origin isn't in the
+"Authorized JavaScript origins" list for that Client ID, even if the ID itself
+is correct.
 - **USSD** (`/ussd/webhook`) speaks the same request shape Africa's Talking's
   gateway calls (`sessionId`, `phoneNumber`, `text`), so pointing a real short-code
   at that URL is the only remaining step to go live. It reuses the exact same
@@ -83,4 +106,5 @@ app/
 | `MPESA_CONSUMER_KEY` / `MPESA_CONSUMER_SECRET` | - | Safaricom Daraja credentials |
 | `MTN_API_KEY` | - | MTN MoMo Collections credentials |
 | `AIRTEL_API_KEY` | - | Airtel Money credentials |
+| `GOOGLE_CLIENT_ID` | - | Google OAuth Client ID - see "Turning on Google Sign-In" above |
 | `UPLOAD_DIR` | `backend/uploads` | Where document uploads are stored on disk |

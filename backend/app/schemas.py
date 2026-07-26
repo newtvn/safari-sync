@@ -16,6 +16,10 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class GoogleAuthRequest(BaseModel):
+    credential: str  # the ID token JWT returned by Google Identity Services
+
+
 class UserOut(BaseModel):
     id: str
     first_name: str

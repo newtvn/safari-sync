@@ -20,6 +20,38 @@ cities, 9 bus operators, 8 routes, and 3 days of schedules, plus three demo acco
 - Interactive API docs: `http://localhost:8000/docs`
 - USSD browser simulator: `http://localhost:8000/api/ussd/simulator`
 
+## Deploying (Render)
+
+The frontend (on Vercel) is static and has nothing to actually call unless this
+backend is running somewhere reachable. Vercel's own serverless functions can't
+host it as-is - it uses background `asyncio` tasks (payment settlement, GPS
+simulation) and a SQLite file that both need to survive between requests, which
+serverless doesn't support. Render's free tier does, so a `render.yaml`
+(repo root, one level up from here) is included:
+
+1. Push this repo to GitHub (already done if you're reading this from the repo).
+2. In the [Render dashboard](https://dashboard.render.com), New → **Blueprint**,
+   and point it at this GitHub repo. Render reads `render.yaml` automatically and
+   provisions a free web service named `safari-sync-api` with `JWT_SECRET`
+   auto-generated and `PAYMENT_SANDBOX=true`.
+3. Wait for the first deploy to finish, then copy the service's URL (something like
+   `https://safari-sync-api.onrender.com`).
+4. Set that URL as `API_BASE` in the frontend (`app.js`, near the top:
+   `const API_BASE = window.SAFARI_SYNC_API_BASE || '...'`) and redeploy the
+   frontend on Vercel so it points at the live backend instead of `localhost:8000`.
+
+Notes specific to Render's free tier:
+- The instance spins down after 15 minutes of inactivity and takes ~30-60s to wake
+  up on the next request - the first request after idle will be slow, not broken.
+- The filesystem (and so the SQLite database) resets on every redeploy, which is
+  fine here since the app auto-reseeds demo data on startup if the DB is empty -
+  just know that any real bookings made against it won't survive a redeploy. For
+  persistent data across redeploys, either add a Render persistent disk mounted at
+  `backend/` (paid plans only) or switch `DATABASE_URL` to a real Postgres instance
+  (e.g. a free Supabase project, same pattern the sibling GoalHub project uses).
+- Add `GOOGLE_CLIENT_ID` / real payment provider keys as additional environment
+  variables on the Render service once you have them (see below).
+
 ## Architecture
 
 ```
